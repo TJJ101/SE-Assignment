@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace SE_ASG
 {
-    public interface User
+    public interface IUser
     {
-        void Login();
+        bool Login();
 
-        // I think also need this browse function
-        void Browse();
+        // I think might also need browse feature (for search and shit)
     }
 }

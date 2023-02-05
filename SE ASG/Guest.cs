@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SE_ASG
 {
-    public class Guest : User
+    public class Guest : IUser
     {
         // missing identification number
         private string personalID { get; set; }
@@ -23,14 +23,11 @@ namespace SE_ASG
             reservations = new List<Reservation>();
         }
 
-        public void Login()
+        public bool Login()
         {
             Console.WriteLine("Logged In");
-        }
 
-        public void Browse()
-        {
-
+            return true;
         }
 
         public void ReserveHotel(Reservation r)

@@ -29,5 +29,11 @@ namespace SE_ASG
                 room.Hotel = this;
             }
         }
+
+        // Need to add this operation into the class diagram
+        public void displayDetails()
+        {
+            Console.WriteLine("Hotel type: " + hotelType + "\nAvailable Rooms: " + avaliableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress " + hotelAddress + "");
+        }
     }
 }
