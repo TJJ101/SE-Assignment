@@ -7,9 +7,14 @@ using System.Threading.Tasks;
 
 namespace SE_ASG
 {
-    public class Guest
+    public class Guest : User
     {
-        private string guestName;
+        private string personalID { get; set; }
+        private string email { get; set; }
+        private string number { get; set; }
+        public double balance { get; set; }
+        private string password { get; set; }
+
         private List<Reservation> reservations;
          
         public Guest()
@@ -17,7 +22,17 @@ namespace SE_ASG
             reservations = new List<Reservation>();
         }
 
-        public void makeReservation(Reservation r)
+        public void Login()
+        {
+            Console.WriteLine("Logged In");
+        }
+
+        public void Browse()
+        {
+
+        }
+
+        public void ReserveHotel(Reservation r)
         {
             if (!reservations.Contains(r))
             {
@@ -26,7 +41,7 @@ namespace SE_ASG
             }
         }
 
-        public void cancelReservation()
+        public void CancelReservation()
         {
             bool result = false;
 
@@ -45,7 +60,7 @@ namespace SE_ASG
                 }
             }
 
-            if (result) { Console.WriteLine("Cancellatio Successfull"); }
+            if (result) { Console.WriteLine("Cancellation Successfull"); }
             else { Console.WriteLine("Cancellation Error"); }
 
         }

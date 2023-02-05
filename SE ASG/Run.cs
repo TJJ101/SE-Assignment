@@ -6,7 +6,7 @@ namespace SE_ASG
     {
         static void Main(string[] args)
         {
-            System.Console.WriteLine("Food?");
+            System.Console.WriteLine("Testing");
             string answer = Console.ReadLine();
             Console.WriteLine(answer);
         }

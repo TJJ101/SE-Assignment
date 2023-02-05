@@ -24,9 +24,14 @@ namespace SE_ASG
                 if (guest != value)
                 {
                     guest = value;
-                    value.makeReservation(this);
+                    value.ReserveHotel(this);
                 }
             }
+        }
+
+        public void Browse()
+        {
+
         }
 
 
@@ -40,15 +45,13 @@ namespace SE_ASG
             if (answer == "y" && (checkInDate - now).TotalDays >= 2 && cancelledReservation == false)
             {
                 cancelledReservation = true;
+                guest.balance += reservationCost;
                 return true;
             }
             else
             {
                 return false;
             }
-
-            // on successful transaction return credits back to customer 
-            // display successful/unsuccessful cancel message
         }
     }
 }
