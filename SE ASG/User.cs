@@ -11,5 +11,6 @@ namespace SE_ASG
         bool Login();
 
         // I think might also need browse feature (for search and shit)
+        void Browse(List<Hotel> hotels);
     }
 }

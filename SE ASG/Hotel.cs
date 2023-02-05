@@ -9,6 +9,9 @@ namespace SE_ASG
     public class Hotel
     {
         // missing average rating
+
+        // added hotel id
+        public int hotelID { get; set; }
         public string hotelType { get; set; }
         public int avaliableRooms { get; set; }
         public bool allowVoucher { get; set; }

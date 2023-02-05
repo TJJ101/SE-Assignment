@@ -30,6 +30,22 @@ namespace SE_ASG
             return true;
         }
 
+        public void Browse(List<Hotel> hotels)
+        {
+            Console.WriteLine("\nAvailable Hotels:");
+            foreach (Hotel h in hotels) { Console.WriteLine(h.hotelID + ") " + h.hotelType); }
+            Console.WriteLine("\nPlease select a hotel: ");
+            string answer = Console.ReadLine();
+
+            foreach (Hotel h in hotels)
+            {
+                if (answer == Convert.ToString(h.hotelID))
+                {
+                    h.displayDetails();
+                }
+            }
+        }
+
         public void ReserveHotel(Reservation r)
         {
             if (!reservations.Contains(r))

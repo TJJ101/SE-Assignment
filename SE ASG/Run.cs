@@ -16,11 +16,11 @@ namespace SE_ASG
             // Creating hotels
             List<Hotel> hotels = new List<Hotel>
             {
-                new Hotel { hotelType = "luxury", avaliableRooms = 1, allowVoucher = true, hotelAddress = "Q street" },
-                new Hotel { hotelType = "themed", avaliableRooms = 1, allowVoucher = true, hotelAddress = "W street" },
-                new Hotel { hotelType = "family-friendly", avaliableRooms = 1, allowVoucher = true, hotelAddress = "E street" },
-                new Hotel { hotelType = "city", avaliableRooms = 1, allowVoucher = false, hotelAddress = "R street" },
-                new Hotel { hotelType = "budget hotel", avaliableRooms = 1, allowVoucher = false, hotelAddress = "T street" }
+                new Hotel { hotelID = 1, hotelType = "luxury", avaliableRooms = 1, allowVoucher = true, hotelAddress = "Q street" },
+                new Hotel { hotelID = 2, hotelType = "themed", avaliableRooms = 1, allowVoucher = true, hotelAddress = "W street" },
+                new Hotel { hotelID = 3, hotelType = "family-friendly", avaliableRooms = 1, allowVoucher = true, hotelAddress = "E street" },
+                new Hotel { hotelID = 4, hotelType = "city", avaliableRooms = 1, allowVoucher = false, hotelAddress = "R street" },
+                new Hotel { hotelID = 5, hotelType = "budget hotel", avaliableRooms = 1, allowVoucher = false, hotelAddress = "T street" }
             };
 
             
@@ -30,19 +30,15 @@ namespace SE_ASG
 
                 if (answer == "1")
                 {
-                    // changed login to return true
+                    // changed login to return true (need change in class diagram)
                     if (userInterface.Login()){
+
                         // probably need to check for user type as well
                         Console.WriteLine("\nPlease choose an option (1 - 2): \n1) Browse  \n2) View Bookings");
                         answer = Console.ReadLine();
                         if (answer == "1")
                         {
-                            int index = 1;
-                            Console.WriteLine("\nAvailable Hotels:");
-                            foreach (Hotel h in hotels) { Console.WriteLine(index + ") " + h.hotelType); index++; }
-                            Console.WriteLine("\nPlease select a hotel: ");
-                            answer = Console.ReadLine();
-
+                            guest.Browse(hotels);
                         }
                     }
                     else { Console.WriteLine("Login Error"); }
