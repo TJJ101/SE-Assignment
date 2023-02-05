@@ -29,12 +29,6 @@ namespace SE_ASG
             }
         }
 
-        public void Browse()
-        {
-
-        }
-
-
         public bool setCancelReservation()
         {
             Console.WriteLine("Are you sure you want to cancel? (y/n)");

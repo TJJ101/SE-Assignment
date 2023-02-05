@@ -9,6 +9,7 @@ namespace SE_ASG
 {
     public class Guest : User
     {
+        // missing identification number
         private string personalID { get; set; }
         private string email { get; set; }
         private string number { get; set; }
