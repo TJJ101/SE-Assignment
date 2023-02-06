@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,10 +89,10 @@ namespace SE_ASG
                         {
                             int id = reservations.Count();
                             Reservation newReservation = new Reservation { reservationID = (id += 1), checkInDate = checkIn, checkOutDate = checkOut, reservationCost = 1.0, cancelledReservation = false };
-                            reservations.Add(newReservation);
                             ReserveHotel(newReservation);
+                            Console.WriteLine("\nReservation made");
                         }
-                        else { Console.WriteLine("\n Error: Unable to create"); }
+                        else { Console.WriteLine("\nError: Unable to create"); }
                     }
                     break;
                 }
@@ -108,28 +109,59 @@ namespace SE_ASG
             }
         }
 
+        // Need to add this operation in class diagram
+        public void ViewBookings()
+        {
+            if (reservations.Count > 0)
+            {
+                Console.WriteLine("\nReservations:\n---------------------");
+                int index = 1;
+                foreach (Reservation r in reservations)
+                {
+                    if (r.cancelledReservation)
+                    {
+                        Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID + " (cancelled)");
+                    }
+                    else { Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID); }
+                    
+                }
+            }
+            else { Console.WriteLine("\nNo reservations found"); }
+        }
+
         public void CancelReservation()
         {
             bool result = false;
 
-            foreach (Reservation r in reservations)
+            if (reservations.Count > 0)
             {
-                Console.WriteLine(r.reservationID);
-            }
-            Console.WriteLine("Please enter ID of reservation to cancel: ");
-            string answer = Console.ReadLine();
+                Console.WriteLine("\nReservations:\n---------------------");
+                int index = 1;
 
-            foreach (Reservation r in reservations)
-            {
-                if (r.reservationID == Convert.ToInt32(answer))
+                foreach (Reservation r in reservations)
                 {
-                    result = r.setCancelReservation();
+                    if (!r.cancelledReservation)
+                    {
+                        Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID);
+                    }
+                    
                 }
+
+                Console.WriteLine("\nPlease enter ID of reservation to cancel: ");
+                string answer = Console.ReadLine();
+
+                foreach (Reservation r in reservations)
+                {
+                    if (r.reservationID == Convert.ToInt32(answer))
+                    {
+                        result = r.setCancelReservation();
+                    }
+                }
+
+                if (result) { Console.WriteLine("\nCancellation Successfull"); }
+                else { Console.WriteLine("\nCancellation Error"); }
             }
-
-            if (result) { Console.WriteLine("Cancellation Successfull"); }
-            else { Console.WriteLine("Cancellation Error"); }
-
+            else { Console.WriteLine("\nThere are no reservations"); }
         }
     }
 }

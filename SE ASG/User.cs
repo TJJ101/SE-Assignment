@@ -13,5 +13,11 @@ namespace SE_ASG
 
         // I think might also need browse feature (for search and shit)
         void Browse(List<Hotel> hotels);
+
+        // Need to add this to class diagram
+        void ViewBookings();
+
+        // Need to add this to class diagram
+        void CancelReservation();
     }
 }

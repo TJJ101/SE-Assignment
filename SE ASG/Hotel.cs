@@ -36,7 +36,7 @@ namespace SE_ASG
         // Need to add this operation into the class diagram
         public void displayDetails()
         {
-            Console.WriteLine("\nHotel type: " + hotelType + "\nAvailable Rooms: " + avaliableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress " + hotelAddress + "");
+            Console.WriteLine("\nHotel type: " + hotelType + "\nAvailable Rooms: " + avaliableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
         }
     }
 }

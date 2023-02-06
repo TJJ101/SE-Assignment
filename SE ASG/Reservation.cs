@@ -25,6 +25,7 @@ namespace SE_ASG
                 if (guest != value)
                 {
                     guest = value;
+                    Console.WriteLine("Guest is:" + guest.personalID);
                     value.ReserveHotel(this);
                 }
             }
