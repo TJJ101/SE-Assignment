@@ -8,7 +8,8 @@ namespace SE_ASG
 {
     public interface IUser
     {
-        bool Login();
+        // might need to return a guest object. Added a list parameter to logins
+        Guest Login(List<Guest> guestList);
 
         // I think might also need browse feature (for search and shit)
         void Browse(List<Hotel> hotels);

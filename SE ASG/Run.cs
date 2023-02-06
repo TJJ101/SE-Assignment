@@ -23,15 +23,23 @@ namespace SE_ASG
                 new Hotel { hotelID = 5, hotelType = "budget hotel", avaliableRooms = 1, allowVoucher = false, hotelAddress = "T street" }
             };
 
-            
+            // creating a guest
+            List<Guest> guests = new List<Guest>
+            {
+                new Guest { personalID = 1, email = "user1@gmail.com", number = "64323224", balance = 10, password = "pass1234"}
+            };
+
+
             while (true){
                 Console.WriteLine("\nWhat do you want to do (1 - 2): \n1) Login  \n2) Register");
                 answer = Console.ReadLine();
 
                 if (answer == "1")
                 {
-                    // changed login to return true (need change in class diagram)
-                    if (userInterface.Login()){
+                    guest = guest.Login(guests);
+
+                    // changed login to return true (need change in class diagram). Might need to change login to return a guest so that we can use it to create resevations and stuff
+                    if (guest != null){
 
                         // probably need to check for user type as well
                         Console.WriteLine("\nPlease choose an option (1 - 2): \n1) Browse  \n2) View Bookings");

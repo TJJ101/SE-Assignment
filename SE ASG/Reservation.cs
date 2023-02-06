@@ -9,12 +9,13 @@ namespace SE_ASG
 {
     public class Reservation
     {
-        public string reservationID { get; set; }
-        private DateTime checkInDate { get; set; }
-        private DateTime checkOutDate { get; set; }
-        private double revervationCost { get; set; }
-        private bool cancelledReservation { get; set; }
-        private double reservationCost { get; set; }    
+        // changed the reservation ID to int (need change in class diagram)
+        public int reservationID { get; set; }
+        public DateTime checkInDate { get; set; }
+        public DateTime checkOutDate { get; set; }
+        public double revervationCost { get; set; }
+        public bool cancelledReservation { get; set; }
+        public double reservationCost { get; set; }    
         private Guest guest;
 
         public Guest Guest

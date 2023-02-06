@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -9,25 +10,44 @@ namespace SE_ASG
 {
     public class Guest : IUser
     {
-        // missing identification number
-        private string personalID { get; set; }
-        private string email { get; set; }
-        private string number { get; set; }
-        public double balance { get; set; }
-        private string password { get; set; }
+        // hvnt put in identification number
 
-        private List<Reservation> reservations;
+        // changed ID to int
+        public int personalID { get; set; }
+        public string email { get; set; }
+        public string number { get; set; }
+        public double balance { get; set; }
+        public string password { get; set; }
+
+        public List<Reservation> reservations;
          
         public Guest()
         {
             reservations = new List<Reservation>();
         }
 
-        public bool Login()
+        public Guest Login(List<Guest> guestList)
         {
-            Console.WriteLine("Logged In");
+            Guest reuturnedGuest = null;
 
-            return true;
+            Console.WriteLine("\nEnter email: ");
+            string email = Console.ReadLine();
+
+            Console.WriteLine("\nEnter paswword: ");
+            string password = Console.ReadLine();
+
+            foreach (Guest g in guestList)
+            {
+                if (email == g.email && password == g.password)
+                {
+                    reuturnedGuest = g;              
+                }
+            }
+
+            if (reuturnedGuest != null) { Console.WriteLine("\nLogged In"); }
+            else { Console.WriteLine("\nEmail or passord is incorrect"); }
+
+            return reuturnedGuest;
         }
 
         public void Browse(List<Hotel> hotels)
@@ -42,7 +62,40 @@ namespace SE_ASG
                 if (answer == Convert.ToString(h.hotelID))
                 {
                     h.displayDetails();
+                    Console.WriteLine("\nDo you want to book? (y/n):");
+                    answer = Console.ReadLine();
+
+                    if (answer == "y")
+                    {
+                        DateTime dateTime;
+                        DateTime checkIn = DateTime.Now;
+                        DateTime checkOut = DateTime.Now;
+
+                        Console.WriteLine("\nSelect a check in date (dd/mm/yyyy): ");
+                        answer = Console.ReadLine();
+                        if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)){
+                            checkIn = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        }
+
+                        Console.WriteLine("\nSelect a check out date (dd/mm/yyyy): ");
+                        answer = Console.ReadLine();
+                        if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+                        {
+                            checkOut = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        }
+
+                        if (checkIn != DateTime.Now && checkOut != DateTime.Now)
+                        {
+                            int id = reservations.Count();
+                            Reservation newReservation = new Reservation { reservationID = (id += 1), checkInDate = checkIn, checkOutDate = checkOut, reservationCost = 1.0, cancelledReservation = false };
+                            reservations.Add(newReservation);
+                            ReserveHotel(newReservation);
+                        }
+                        else { Console.WriteLine("\n Error: Unable to create"); }
+                    }
+                    break;
                 }
+                else { Console.WriteLine("\nInvalid Input"); }
             }
         }
 
@@ -68,7 +121,7 @@ namespace SE_ASG
 
             foreach (Reservation r in reservations)
             {
-                if (r.reservationID == answer)
+                if (r.reservationID == Convert.ToInt32(answer))
                 {
                     result = r.setCancelReservation();
                 }
