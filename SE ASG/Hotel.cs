@@ -10,9 +10,11 @@ namespace SE_ASG
     {
         // missing average rating
 
-        // added hotel id
+        // added hotel id from class diagram
         public int hotelID { get; set; }
         public string hotelType { get; set; }
+
+        // can remove available room from class diagram
         public int avaliableRooms { get; set; }
         public bool allowVoucher { get; set; }
         public string hotelAddress { get; set; }
@@ -34,9 +36,49 @@ namespace SE_ASG
         }
 
         // Need to add this operation into the class diagram
-        public void displayDetails()
+        public bool displayDetails()
         {
-            Console.WriteLine("\nHotel type: " + hotelType + "\nAvailable Rooms: " + avaliableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
+            avaliableRooms = 0;
+            foreach (Room r in rooms)
+            {
+                if (r.availability) { avaliableRooms++; } 
+            }
+
+            if (avaliableRooms > 0)
+            {
+                Console.WriteLine("\nHotel type: " + hotelType + "\nAvailable Rooms: " + avaliableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
+                return true;
+            }
+            else 
+            {
+                Console.WriteLine("\nThere are currently no rooms available at this hotel");
+                return false; 
+            }
+        }
+
+        // add this into class diagram
+        public void displayRooms()
+        {
+            Console.WriteLine("\n-------- Rooms --------");
+            foreach (Room r in rooms)
+            {
+                Console.WriteLine("\n1) Room Number: "+ r.roomNumber +" Availability "+ r.availability +"");
+                
+            }
+        }
+
+        // add this into class diagram
+        public Room getRoom(string number)
+        {
+            int num = Convert.ToInt32(number);
+            foreach (Room r in rooms)
+            {
+                if (num == r.roomNumber)
+                {
+                    return r;
+                }
+            }
+            return null;
         }
     }
 }

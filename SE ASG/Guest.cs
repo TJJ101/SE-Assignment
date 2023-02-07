@@ -51,6 +51,7 @@ namespace SE_ASG
             return reuturnedGuest;
         }
 
+        // Add this in class diagram
         public void Browse(List<Hotel> hotels)
         {
             Console.WriteLine("\nAvailable Hotels:");
@@ -62,41 +63,59 @@ namespace SE_ASG
             {
                 if (answer == Convert.ToString(h.hotelID))
                 {
-                    h.displayDetails();
-                    Console.WriteLine("\nDo you want to book? (y/n):");
-                    answer = Console.ReadLine();
+                    bool roomsAvailable = h.displayDetails();
 
-                    if (answer == "y")
+                    if (roomsAvailable)
                     {
-                        DateTime dateTime;
-                        DateTime checkIn = DateTime.Now;
-                        DateTime checkOut = DateTime.Now;
-
-                        Console.WriteLine("\nSelect a check in date (dd/mm/yyyy): ");
+                        Console.WriteLine("\nDo you want to view rooms? (y/n):");
                         answer = Console.ReadLine();
-                        if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime)){
-                            checkIn = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                        }
 
-                        Console.WriteLine("\nSelect a check out date (dd/mm/yyyy): ");
-                        answer = Console.ReadLine();
-                        if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+                        if (answer == "y")
                         {
-                            checkOut = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                        }
+                            h.displayRooms();
+                            Console.WriteLine("\nPlease select a room: ");
+                            answer = Console.ReadLine();
+                            Room room = h.getRoom(answer);
 
-                        if (checkIn != DateTime.Now && checkOut != DateTime.Now)
-                        {
-                            int id = reservations.Count();
-                            Reservation newReservation = new Reservation { reservationID = (id += 1), checkInDate = checkIn, checkOutDate = checkOut, reservationCost = 1.0, cancelledReservation = false };
-                            ReserveHotel(newReservation);
-                            Console.WriteLine("\nReservation made");
+                            if (room != null)
+                            {
+                                DateTime dateTime;
+                                DateTime checkIn = DateTime.Now;
+                                DateTime checkOut = DateTime.Now;
+
+                                Console.WriteLine("\nSelect a check in date (dd/mm/yyyy): ");
+                                answer = Console.ReadLine();
+                                if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+                                {
+                                    checkIn = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                }
+                                else { Console.WriteLine("\nInvalid Input"); break; }
+
+
+                                Console.WriteLine("\nSelect a check out date (dd/mm/yyyy): ");
+                                answer = Console.ReadLine();
+                                if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+                                {
+                                    checkOut = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                }
+                                else { Console.WriteLine("\nInvalid Input"); break; }
+
+                                if (checkIn != DateTime.Now && checkOut != DateTime.Now)
+                                {
+                                    int id = reservations.Count();
+                                    Reservation newReservation = new Reservation { reservationID = (id += 1), checkInDate = checkIn, checkOutDate = checkOut, reservationCost = room.roomCost, cancelledReservation = false, room = room};
+                                    ReserveHotel(newReservation);
+                                    room.availability = false;
+                                    Console.WriteLine("\nReservation made");
+                                }
+                                else { Console.WriteLine("\nError: Unable to create"); }
+                            }
+                            else { Console.WriteLine("\nError: Unable to create"); }
                         }
-                        else { Console.WriteLine("\nError: Unable to create"); }
-                    }
-                    break;
+                        break;
+                    }                   
                 }
-                else { Console.WriteLine("\nInvalid Input"); }
+                //else { Console.WriteLine("\nInvalid Input"); }
             }
         }
 
@@ -132,6 +151,8 @@ namespace SE_ASG
         public void CancelReservation()
         {
             bool result = false;
+            bool cacellationAvailable = false;
+
 
             if (reservations.Count > 0)
             {
@@ -143,23 +164,29 @@ namespace SE_ASG
                     if (!r.cancelledReservation)
                     {
                         Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID);
+                        cacellationAvailable = true;
                     }
                     
                 }
 
-                Console.WriteLine("\nPlease enter ID of reservation to cancel: ");
-                string answer = Console.ReadLine();
-
-                foreach (Reservation r in reservations)
+                if (cacellationAvailable)
                 {
-                    if (r.reservationID == Convert.ToInt32(answer))
-                    {
-                        result = r.setCancelReservation();
-                    }
-                }
+                    Console.WriteLine("\nPlease enter ID of reservation to cancel: ");
+                    string answer = Console.ReadLine();
 
-                if (result) { Console.WriteLine("\nCancellation Successfull"); }
-                else { Console.WriteLine("\nCancellation Error"); }
+                    foreach (Reservation r in reservations)
+                    {
+                        if (r.reservationID == Convert.ToInt32(answer))
+                        {
+                            result = r.setCancelReservation();
+                        }
+                    }
+
+                    if (result) { Console.WriteLine("\nCancellation Successfull"); }
+                    else { Console.WriteLine("\nCancellation Error"); }
+                }
+                else { Console.WriteLine("\nThere are no reservations"); }
+
             }
             else { Console.WriteLine("\nThere are no reservations"); }
         }

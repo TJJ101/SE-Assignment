@@ -18,6 +18,9 @@ namespace SE_ASG
         public double reservationCost { get; set; }    
         private Guest guest;
 
+        //need add this into the class diagra,
+        public Room room;
+
         public Guest Guest
         {
             set
@@ -25,7 +28,6 @@ namespace SE_ASG
                 if (guest != value)
                 {
                     guest = value;
-                    Console.WriteLine("Guest is:" + guest.personalID);
                     value.ReserveHotel(this);
                 }
             }
@@ -42,6 +44,7 @@ namespace SE_ASG
             {
                 cancelledReservation = true;
                 guest.balance += reservationCost;
+                room.availability = true;
                 return true;
             }
             else

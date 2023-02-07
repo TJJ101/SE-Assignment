@@ -8,6 +8,15 @@ namespace SE_ASG
 {
     public class Room
     {
+        // changed room number to string
+        public int roomNumber { get; set; }
+        public string roomType { get; set; }
+        public double roomCost { get; set; }
+        public int maxGuest { get; set; }
+        public bool availability { get; set; }
+        public List<string> facilities { get; set; }
+        
+            
         private Hotel hotel;
 
         public Hotel Hotel
