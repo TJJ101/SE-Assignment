@@ -276,6 +276,7 @@ namespace SE_ASG
                     balance -= r.reservationCost;
                     r.paymentMade = true;
                     Console.WriteLine("Payment successfully made!");
+                    r.SetReservationStatus();
                 }
             }
         }

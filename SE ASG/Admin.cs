@@ -23,6 +23,17 @@ namespace SE_ASG
             set { password = value; }
         }
 
+        public void InformHotel()
+        {
+            // to be implemented
+        }
+
+        public void Update(int rating, string review, string id)
+        {
+            //id is hotelId
+            // to be implemented
+        }
+
         public Guest Login(List<Guest> guestList) { return null; }
 
         // I think might also need browse feature (for search and shit)

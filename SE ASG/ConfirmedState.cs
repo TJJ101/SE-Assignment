@@ -9,7 +9,7 @@ namespace SE_Assignment
     {
         public void SetReservationStatus()
         {
-            // to be implemented
+            // InformHotel
         }
     }
 }
