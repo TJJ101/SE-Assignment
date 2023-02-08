@@ -62,8 +62,7 @@ namespace SE_ASG
             Console.WriteLine("\n-------- Rooms --------");
             foreach (Room r in rooms)
             {
-                Console.WriteLine("\n1) Room Number: "+ r.roomNumber +" Availability "+ r.availability +"");
-                
+                Console.WriteLine("\n1) Room Number: "+ r.roomNumber +" Availability: "+ r.availability +"");
             }
         }
 

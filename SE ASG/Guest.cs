@@ -103,7 +103,7 @@ namespace SE_ASG
                                 if (checkIn != DateTime.Now && checkOut != DateTime.Now)
                                 {
                                     int id = reservations.Count();
-                                    Reservation newReservation = new Reservation { reservationID = (id += 1), checkInDate = checkIn, checkOutDate = checkOut, reservationCost = room.roomCost, cancelledReservation = false, room = room};
+                                    Reservation newReservation = new Reservation { reservationID = (id += 1), checkInDate = checkIn, checkOutDate = checkOut, reservationCost = room.roomCost, cancelledReservation = false, room = room, paymentMade = false };
                                     ReserveHotel(newReservation);
                                     room.availability = false;
                                     Console.WriteLine("\nReservation made");
@@ -144,6 +144,23 @@ namespace SE_ASG
                     else { Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID); }
                     
                 }
+                Console.WriteLine("\nSelect a Reservation ID to display details:\n---------------------");
+
+                string answer = Console.ReadLine();
+                var isNumeric = int.TryParse(answer, out int n);
+
+                if (isNumeric)
+                {
+
+                    foreach (Reservation r in reservations)
+                    {
+                        if (r.reservationID == n)
+                        {
+                            r.displayDetails();
+                        }                       
+                    }
+                }
+
             }
             else { Console.WriteLine("\nNo reservations found"); }
         }
@@ -189,6 +206,33 @@ namespace SE_ASG
 
             }
             else { Console.WriteLine("\nThere are no reservations"); }
+        }
+
+        public void MakePayment()
+        {
+            int count = 1;
+            foreach (Reservation r in reservations)
+            {
+                if (!r.cancelledReservation && !r.paymentMade)
+                {
+                    if (count == 1)
+                    {
+                        Console.WriteLine("\nPlease select the reservation you want to make payment to:");
+                    }   
+                    Console.WriteLine(count + ") " + "Reservation ID: " + r.reservationID + "");
+                }
+                count++;
+            }
+
+            if (count == 1)
+            {
+                Console.WriteLine("\nNo reservations that require payment");
+            }
+            else
+            {
+                string answer = Console.ReadLine();
+            }
+
         }
     }
 }

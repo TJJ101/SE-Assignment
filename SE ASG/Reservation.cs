@@ -16,6 +16,10 @@ namespace SE_ASG
         public double revervationCost { get; set; }
         public bool cancelledReservation { get; set; }
         public double reservationCost { get; set; }    
+
+        //need to add this payment made into class diagram
+        public bool paymentMade { get; set; }
+
         private Guest guest;
 
         //need add this into the class diagra,
@@ -51,6 +55,12 @@ namespace SE_ASG
             {
                 return false;
             }
+        }
+
+        // add this into class diagram
+        public void displayDetails()
+        {
+            Console.WriteLine("\n-------- Details --------\nRervation ID: "+ reservationID +"\nCheck in date: "+ checkInDate +"\nCheck out date: "+ checkOutDate +"\nIs cancelled: "+ cancelledReservation +"\nPayment made: "+ paymentMade +"");
         }
     }
 }

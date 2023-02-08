@@ -53,7 +53,7 @@ namespace SE_ASG
                         while (true)
                         {
                             // probably need to check for user type as well
-                            Console.WriteLine("\nPlease choose an option (1 - 3): \n1) Browse  \n2) View Reservations\n3) Cancel Reservations\n4) Logout");
+                            Console.WriteLine("\nPlease choose an option (1 - 5): \n1) Browse  \n2) View Reservations\n3) Cancel Reservations\n4) Make Payment\n5) Logout");
                             answer = Console.ReadLine();
                             if (answer == "1")
                             {
@@ -68,6 +68,10 @@ namespace SE_ASG
                                 guest.CancelReservation();
                             }
                             else if (answer == "4")
+                            {
+                                guest.MakePayment();
+                            }
+                            else if (answer == "5")
                             {
                                 guest = null;
                                 break;
