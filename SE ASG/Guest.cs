@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -198,9 +200,9 @@ namespace SE_ASG
                         Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID + " (cancelled)");
                     }
                     else { Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID); }
-                    
+                    index++;
                 }
-                Console.WriteLine("\nSelect a Reservation ID to display details:\n---------------------");
+                Console.WriteLine("\nSelect a Reservation ID to display details (or any character to go back):\n---------------------");
 
                 string answer = Console.ReadLine();
                 var isNumeric = int.TryParse(answer, out int n);
@@ -252,6 +254,8 @@ namespace SE_ASG
                         if (r.reservationID == Convert.ToInt32(answer))
                         {
                             DateTime now = DateTime.Now;
+                            Debug.WriteLine(now);
+                            Debug.WriteLine("Total days: " + (r.checkInDate - now).TotalDays);
                             if ((r.checkInDate - now).TotalDays >= 2)
                             {
                                 result = r.SetCancelReservation();
