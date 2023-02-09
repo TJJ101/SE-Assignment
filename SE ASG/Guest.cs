@@ -63,7 +63,7 @@ namespace SE_ASG
             {
                 if (answer == Convert.ToString(h.hotelID))
                 {
-                    bool roomsAvailable = h.displayDetails();
+                    bool roomsAvailable = h.DisplayDetails();
 
                     if (roomsAvailable)
                     {
@@ -72,10 +72,10 @@ namespace SE_ASG
 
                         if (answer == "y")
                         {
-                            h.displayRooms();
+                            h.DisplayRooms();
                             Console.WriteLine("\nPlease select a room: ");
                             answer = Console.ReadLine();
-                            Room room = h.getRoom(answer);
+                            Room room = h.GetRoom(answer);
 
                             if (room != null)
                             {
@@ -105,7 +105,7 @@ namespace SE_ASG
                                     int id = reservations.Count();
                                     Reservation newReservation = new Reservation { reservationID = (id += 1), checkInDate = checkIn, checkOutDate = checkOut, reservationCost = room.roomCost, cancelledReservation = false, room = room, paymentMade = false };
                                     ReserveHotel(newReservation);
-                                    room.availability = false;
+                                    room.UpdateAvailability(false);
                                     Console.WriteLine("\nReservation made");
                                 }
                                 else { Console.WriteLine("\nError: Unable to create"); }
@@ -156,7 +156,7 @@ namespace SE_ASG
                     {
                         if (r.reservationID == n)
                         {
-                            r.displayDetails();
+                            r.DisplayDetails();
                         }                       
                     }
                 }
@@ -195,7 +195,11 @@ namespace SE_ASG
                     {
                         if (r.reservationID == Convert.ToInt32(answer))
                         {
-                            result = r.setCancelReservation();
+                            DateTime now = DateTime.Now;
+                            if ((r.checkInDate - now).TotalDays >= 2)
+                            {
+                                result = r.SetCancelReservation();
+                            }                           
                         }
                     }
 
@@ -232,7 +236,6 @@ namespace SE_ASG
             {
                 string answer = Console.ReadLine();
             }
-
         }
     }
 }

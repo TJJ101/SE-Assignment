@@ -16,7 +16,6 @@ namespace SE_ASG
         public bool availability { get; set; }
         public List<string> facilities { get; set; }
         
-            
         private Hotel hotel;
 
         public Hotel Hotel
@@ -29,6 +28,11 @@ namespace SE_ASG
                     value.AddRoom(this);
                 }
             }
+        }
+
+        public void UpdateAvailability (bool boolean)
+        {
+            availability = boolean;
         }
     }
 }

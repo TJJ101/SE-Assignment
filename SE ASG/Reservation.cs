@@ -22,7 +22,7 @@ namespace SE_ASG
 
         private Guest guest;
 
-        //need add this into the class diagra,
+        //need add this into the class diagram
         public Room room;
 
         public Guest Guest
@@ -37,7 +37,7 @@ namespace SE_ASG
             }
         }
 
-        public bool setCancelReservation()
+        public bool SetCancelReservation()
         {
             Console.WriteLine("Are you sure you want to cancel? (y/n)");
             string answer = Console.ReadLine();
@@ -48,7 +48,7 @@ namespace SE_ASG
             {
                 cancelledReservation = true;
                 guest.balance += reservationCost;
-                room.availability = true;
+                room.UpdateAvailability(true);
                 return true;
             }
             else
@@ -58,7 +58,7 @@ namespace SE_ASG
         }
 
         // add this into class diagram
-        public void displayDetails()
+        public void DisplayDetails()
         {
             Console.WriteLine("\n-------- Details --------\nRervation ID: "+ reservationID +"\nCheck in date: "+ checkInDate +"\nCheck out date: "+ checkOutDate +"\nIs cancelled: "+ cancelledReservation +"\nPayment made: "+ paymentMade +"");
         }

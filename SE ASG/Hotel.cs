@@ -36,7 +36,7 @@ namespace SE_ASG
         }
 
         // Need to add this operation into the class diagram
-        public bool displayDetails()
+        public bool DisplayDetails()
         {
             avaliableRooms = 0;
             foreach (Room r in rooms)
@@ -57,7 +57,7 @@ namespace SE_ASG
         }
 
         // add this into class diagram
-        public void displayRooms()
+        public void DisplayRooms()
         {
             Console.WriteLine("\n-------- Rooms --------");
             foreach (Room r in rooms)
@@ -67,7 +67,7 @@ namespace SE_ASG
         }
 
         // add this into class diagram
-        public Room getRoom(string number)
+        public Room GetRoom(string number)
         {
             int num = Convert.ToInt32(number);
             foreach (Room r in rooms)
