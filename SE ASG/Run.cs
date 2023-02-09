@@ -10,6 +10,7 @@ namespace SE_ASG
             // This file is for the codes to run the main stuff
             IUser userInterface = new Guest();
             IUser guest = new Guest();
+            Guest guestG = new Guest();
             Hotel hotel = new Hotel();
             string answer;
 
@@ -85,7 +86,15 @@ namespace SE_ASG
 
                 else if (answer == "2")
                 {
-
+                    List<string> newguest = new List<string>();
+                    newguest = guestG.Register(guests);
+                    if (newguest == null){
+                        continue;
+                    }
+                    else{
+                        var test = new Guest{personalID = int.Parse(newguest[0]), email = newguest[1], number = newguest[2], balance = int.Parse(newguest[3]), password = newguest[4]};
+                        guests.Add(test);
+                    }
                 }
             }         
 
