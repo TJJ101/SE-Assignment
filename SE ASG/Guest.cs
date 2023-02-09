@@ -270,12 +270,10 @@ namespace SE_ASG
                 }
                 else { Console.WriteLine("\nThere are no reservations"); }
 
-            }
-        }
 
-        public void MakePayment()
+        public void cancelReservation()
         {
-
+           
         }
     }
 }
