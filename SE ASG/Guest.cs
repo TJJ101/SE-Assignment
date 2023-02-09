@@ -244,8 +244,8 @@ namespace SE_ASG
                         Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID);
                         cacellationAvailable = true;
                     }
-                    index ++;
-                    
+                    index++;
+
                 }
 
                 if (cacellationAvailable)
@@ -261,7 +261,7 @@ namespace SE_ASG
                             if ((r.checkInDate - now).TotalDays >= 2)
                             {
                                 result = r.setCancelReservation();
-                            }                        
+                            }
                         }
                     }
 
@@ -271,33 +271,10 @@ namespace SE_ASG
                 else { Console.WriteLine("\nThere are no reservations"); }
 
             }
-            else { Console.WriteLine("\nThere are no reservations"); }
         }
 
         public void MakePayment()
         {
-            int count = 1;
-            foreach (Reservation r in reservations)
-            {
-                if (!r.cancelledReservation && !r.paymentMade)
-                {
-                    if (count == 1)
-                    {
-                        Console.WriteLine("\nPlease select the reservation you want to make payment to:");
-                    }   
-                    Console.WriteLine(count + ") " + "Reservation ID: " + r.reservationID + "");
-                }
-                count++;
-            }
-
-            if (count == 1)
-            {
-                Console.WriteLine("\nNo reservations that require payment");
-            }
-            else
-            {
-                string answer = Console.ReadLine();
-            }
 
         }
     }

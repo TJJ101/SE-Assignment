@@ -1,0 +1,15 @@
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\bin\Debug\net6.0\SE ASG.exe
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\bin\Debug\net6.0\SE ASG.deps.json
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\bin\Debug\net6.0\SE ASG.runtimeconfig.json
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\bin\Debug\net6.0\SE ASG.dll
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\bin\Debug\net6.0\SE ASG.pdb
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\obj\Debug\net6.0\SE ASG.csproj.AssemblyReference.cache
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\obj\Debug\net6.0\SE ASG.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\obj\Debug\net6.0\SE ASG.AssemblyInfoInputs.cache
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\obj\Debug\net6.0\SE ASG.AssemblyInfo.cs
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\obj\Debug\net6.0\SE ASG.csproj.CoreCompileInputs.cache
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\obj\Debug\net6.0\SE ASG.dll
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\obj\Debug\net6.0\refint\SE ASG.dll
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\obj\Debug\net6.0\SE ASG.pdb
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\obj\Debug\net6.0\SE ASG.genruntimeconfig.cache
+C:\Users\lolot\OneDrive\Desktop\school shit\SE\ASG\SE ASG - Git\SE ASG\obj\Debug\net6.0\ref\SE ASG.dll

@@ -31,7 +31,7 @@ namespace SE_ASG
             {
                 if (guest != value)
                 {
-                    guest = value;               
+                    guest = value;
                     value.ReserveHotel(this);
                 }
             }
