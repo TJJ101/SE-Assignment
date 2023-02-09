@@ -27,6 +27,7 @@ namespace SE_ASG
             reservations = new List<Reservation>();
         }
 
+
         public Guest Login(List<Guest> guestList)
         {
             Guest reuturnedGuest = null;
@@ -49,6 +50,61 @@ namespace SE_ASG
             else { Console.WriteLine("\nEmail or passord is incorrect"); }
 
             return reuturnedGuest;
+        }
+
+        public List<string> Register(List<Guest> guestList)
+        {
+            bool Exist = false;
+            int X;
+            Console.WriteLine("\nEnter email: ");
+            string email = Console.ReadLine();
+
+            Console.WriteLine("\nPersonal ID: ");
+            string Result = Console.ReadLine();
+            while(!Int32.TryParse(Result, out X))
+            {
+                Console.WriteLine("Not a valid number, try again.\nPersonal ID:");
+
+                Result = Console.ReadLine();
+            }
+            
+
+            Console.WriteLine("\nEnter Phone Number: ");
+            string num = Console.ReadLine();
+
+            Console.WriteLine("\nEnter password: ");
+            string password = Console.ReadLine();
+
+            Console.WriteLine("\nRetype passwword: ");
+            string password2 = Console.ReadLine();
+
+            foreach (Guest g in guestList)
+            {
+                if (email == g.email)
+                {
+                    Exist = true;
+                }
+            }
+
+            if (Exist == true)
+            {
+                Console.WriteLine("\nEmail exists in the database");
+            }
+            if (password != password2)
+            {
+                Console.WriteLine("\nPassword Mismatch");
+            }
+            if(email == "" || num == "" || password == "" || password2 == "")
+            {
+                Console.WriteLine("\nPlease input all the informations required");
+            }
+            if (Exist == false && password == password2 && email != "" && num != "" && password != "" && password2 != "")
+            {
+                List<string> guest = new List<string>(){Convert.ToString(X), email, num, "0", password};
+                Console.WriteLine("\nAccount successfully registered");
+                return guest;
+            }
+            return null;
         }
 
         // Add this in class diagram
