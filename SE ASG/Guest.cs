@@ -21,7 +21,7 @@ namespace SE_ASG
         public string password { get; set; }
 
         public List<Reservation> reservations;
-         
+
         public Guest()
         {
             reservations = new List<Reservation>();
@@ -42,7 +42,7 @@ namespace SE_ASG
             {
                 if (email == g.email && password == g.password)
                 {
-                    reuturnedGuest = g;              
+                    reuturnedGuest = g;
                 }
             }
 
@@ -61,13 +61,13 @@ namespace SE_ASG
 
             Console.WriteLine("\nPersonal ID: ");
             string Result = Console.ReadLine();
-            while(!Int32.TryParse(Result, out X))
+            while (!Int32.TryParse(Result, out X))
             {
                 Console.WriteLine("Not a valid number, try again.\nPersonal ID:");
 
                 Result = Console.ReadLine();
             }
-            
+
 
             Console.WriteLine("\nEnter Phone Number: ");
             string num = Console.ReadLine();
@@ -94,13 +94,13 @@ namespace SE_ASG
             {
                 Console.WriteLine("\nPassword Mismatch");
             }
-            if(email == "" || num == "" || password == "" || password2 == "")
+            if (email == "" || num == "" || password == "" || password2 == "")
             {
                 Console.WriteLine("\nPlease input all the informations required");
             }
             if (Exist == false && password == password2 && email != "" && num != "" && password != "" && password2 != "")
             {
-                List<string> guest = new List<string>(){Convert.ToString(X), email, num, "0", password};
+                List<string> guest = new List<string>() { Convert.ToString(X), email, num, "0", password };
                 Console.WriteLine("\nAccount successfully registered");
                 return guest;
             }
@@ -109,7 +109,7 @@ namespace SE_ASG
 
         public void ViewDetails()
         {
-            Console.WriteLine("\nUser ID: " + personalID + "\nNumber: " + number + "\nBalance: "+ balance +"");
+            Console.WriteLine("\nUser ID: " + personalID + "\nNumber: " + number + "\nBalance: " + balance + "");
         }
 
 
@@ -134,47 +134,55 @@ namespace SE_ASG
                         if (answer == "y")
                         {
                             h.displayRooms();
-                            Console.WriteLine("\nPlease select a room: ");
+
+                            Console.WriteLine("\nPlease select a room to view details (enter any character to go back): ");
                             answer = Console.ReadLine();
                             Room room = h.getRoom(answer);
+                            room.ViewDetails();
 
-                            if (room != null)
+                            Console.WriteLine("\nDo you want to make a booking? (y/n):");
+                            answer = Console.ReadLine();
+
+                            if (answer == "y")
                             {
-                                DateTime dateTime;
-                                DateTime checkIn = DateTime.Now;
-                                DateTime checkOut = DateTime.Now;
+                                if (room != null)
+                                {                                    
+                                    DateTime dateTime;
+                                    DateTime checkIn = DateTime.Now;
+                                    DateTime checkOut = DateTime.Now;
 
-                                Console.WriteLine("\nSelect a check in date (dd/mm/yyyy): ");
-                                answer = Console.ReadLine();
-                                if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
-                                {
-                                    checkIn = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                                }
-                                else { Console.WriteLine("\nInvalid Input"); break; }
+                                    Console.WriteLine("\nSelect a check in date (dd/mm/yyyy): ");
+                                    answer = Console.ReadLine();
+                                    if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+                                    {
+                                        checkIn = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    }
+                                    else { Console.WriteLine("\nInvalid Input"); break; }
 
 
-                                Console.WriteLine("\nSelect a check out date (dd/mm/yyyy): ");
-                                answer = Console.ReadLine();
-                                if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
-                                {
-                                    checkOut = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                                }
-                                else { Console.WriteLine("\nInvalid Input"); break; }
+                                    Console.WriteLine("\nSelect a check out date (dd/mm/yyyy): ");
+                                    answer = Console.ReadLine();
+                                    if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+                                    {
+                                        checkOut = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    }
+                                    else { Console.WriteLine("\nInvalid Input"); break; }
 
-                                if (checkIn != DateTime.Now && checkOut != DateTime.Now)
-                                {
-                                    int id = reservations.Count();
-                                    Reservation newReservation = new Reservation { reservationID = (id += 1), checkInDate = checkIn, checkOutDate = checkOut, reservationCost = room.roomCost, cancelledReservation = false, room = room, paymentMade = false };
-                                    ReserveHotel(newReservation);
-                                    room.availability = false;
-                                    Console.WriteLine("\nReservation made");
+                                    if (checkIn != DateTime.Now && checkOut != DateTime.Now)
+                                    {
+                                        int id = reservations.Count();
+                                        Reservation newReservation = new Reservation { reservationID = (id += 1), checkInDate = checkIn, checkOutDate = checkOut, reservationCost = room.roomCost, cancelledReservation = false, room = room, paymentMade = false };
+                                        ReserveHotel(newReservation);
+                                        room.availability = false;
+                                        Console.WriteLine("\nReservation made");
+                                    }
+                                    else { Console.WriteLine("\nError: Unable to create"); }
                                 }
                                 else { Console.WriteLine("\nError: Unable to create"); }
-                            }
-                            else { Console.WriteLine("\nError: Unable to create"); }
+                            }                                       
                         }
                         break;
-                    }                   
+                    }
                 }
                 //else { Console.WriteLine("\nInvalid Input"); }
             }
@@ -202,8 +210,8 @@ namespace SE_ASG
                         Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID + " (cancelled)");
                     }
                     else { Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID); }
-                    index ++;
-                    
+                    index++;
+
                 }
                 Console.WriteLine("\nSelect a Reservation ID to display details:\n---------------------");
 
@@ -218,7 +226,7 @@ namespace SE_ASG
                         if (r.reservationID == n)
                         {
                             r.displayDetails();
-                        }                       
+                        }
                     }
                 }
 
@@ -270,10 +278,12 @@ namespace SE_ASG
                 }
                 else { Console.WriteLine("\nThere are no reservations"); }
 
+            }
+        }
 
-        public void cancelReservation()
+        public void MakePayment()
         {
-           
+
         }
     }
 }

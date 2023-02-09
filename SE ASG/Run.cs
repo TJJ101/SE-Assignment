@@ -54,25 +54,29 @@ namespace SE_ASG
                         while (true)
                         {
                             // probably need to check for user type as well
-                            Console.WriteLine("\nPlease choose an option (1 - 5): \n1) Browse  \n2) View Reservations\n3) Cancel Reservations\n4) Make Payment\n5) Logout");
+                            Console.WriteLine("\nPlease choose an option (1 - 6): \n1) View Profile\n2) Browse  \n3) View Reservations\n4) Cancel Reservations\n5) Make Payment\n6) Logout");
                             answer = Console.ReadLine();
                             if (answer == "1")
                             {
-                                guest.Browse(hotels);
+                                guest.ViewDetails();
                             }
                             else if (answer == "2")
                             {
-                                guest.ViewBookings();
+                                guest.Browse(hotels);
                             }
                             else if (answer == "3")
                             {
-                                guest.CancelReservation();
+                                guest.ViewBookings();
                             }
                             else if (answer == "4")
                             {
-                                guest.MakePayment();
+                                guest.CancelReservation();
                             }
                             else if (answer == "5")
+                            {
+                                guest.MakePayment();
+                            }
+                            else if (answer == "6")
                             {
                                 guest = null;
                                 break;

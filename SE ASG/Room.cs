@@ -30,5 +30,10 @@ namespace SE_ASG
                 }
             }
         }
+
+        public void ViewDetails()
+        {
+            Console.WriteLine("-------- Room Details --------\nRoom number: " + roomNumber + "\nRoom Cost: " + roomCost + "\navailability: " + availability + "");
+        }
     }
 }

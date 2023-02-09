@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,5 +23,7 @@ namespace SE_ASG
 
         // add this to class diageam
         void MakePayment();
+
+        void ViewDetails();
     }
 }

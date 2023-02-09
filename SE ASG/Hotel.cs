@@ -46,7 +46,7 @@ namespace SE_ASG
 
             if (avaliableRooms > 0)
             {
-                Console.WriteLine("\nHotel type: " + hotelType + "\nAvailable Rooms: " + avaliableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
+                Console.WriteLine("-------- Hotel Details --------\nHotel type: " + hotelType + "\nAvailable Rooms: " + avaliableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
                 return true;
             }
             else 
@@ -62,7 +62,7 @@ namespace SE_ASG
             Console.WriteLine("\n-------- Rooms --------");
             foreach (Room r in rooms)
             {
-                Console.WriteLine("\n1) Room Number: "+ r.roomNumber +" Availability: "+ r.availability +"");
+                Console.WriteLine("1) Room Number: "+ r.roomNumber +" Availability: "+ r.availability +"");
             }
         }
 
