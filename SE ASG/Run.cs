@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SE_Assignment;
+using System;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace SE_ASG
@@ -39,6 +41,7 @@ namespace SE_ASG
             // Running of the program
             while (true)
             {
+                Console.WriteLine(DateTime.Now.ToString());
                 Console.WriteLine("\nWhat do you want to do (1 - 2): \n1) Login  \n2) Register");
                 Console.WriteLine("------------------");
                 answer = Console.ReadLine();
@@ -54,47 +57,126 @@ namespace SE_ASG
                         while (true)
                         {
                             // probably need to check for user type as well
-                            Console.WriteLine("\nPlease choose an option (1 - 5): \n1) Browse  \n2) View Reservations\n3) Cancel Reservations\n4) Make Payment\n5) Logout");
+                            Console.WriteLine("\nPlease choose an option (1 - 5): \n1) Browse  \n2) View Reservations\n3) Cancel Reservations\n4) Make Payment\n5) Check In\n6) Check Out\n7) Logout");
                             Console.WriteLine("--------------------------");
                             answer = Console.ReadLine();
+                            
+                            /// Browse Hotel
                             if (answer == "1")
                             {
                                 guest.Browse(hotels);
                             }
+
+                            // View Bookings
                             else if (answer == "2")
                             {
                                 guest.ViewBookings();
                             }
+
+                            // Cancel Reservation
                             else if (answer == "3")
                             {
                                 guest.CancelReservation();
                             }
+
+                            //Make Payment
                             else if (answer == "4")
                             {
                                 int count = 1;
                                 foreach (Reservation r in guest.reservations)
                                 {
-                                    if (!r.cancelledReservation && !r.paymentMade)
+                                    if (r.reservationState is SubmittedState)
                                     {
-                                        if (count == 1)
-                                        {
-                                            Console.WriteLine("\nPlease select the reservation you want to make payment to:");
-                                        }
-                                        Console.WriteLine(count + ") " + "Reservation ID: " + r.reservationID + "");
+                                        if (count == 1) { Console.WriteLine("\n----------------------------Reservations----------------------------"); }
+                                        Console.WriteLine("ID: " + r.reservationID + " |Hotel: " + r.room.Hotel.hotelType + " | Room: " + r.room.roomType + " | Cost: $" + r.reservationCost + " | " + r.checkInDate.ToShortDateString() + " - " + r.checkOutDate.ToShortDateString());
                                     }
                                     count++;
                                 }
 
-                                if (count == 1)
-                                {
-                                    Console.WriteLine("\nNo reservations that require payment");
-                                }
+                                if (count == 1) { Console.WriteLine("\nNo reservations that require payment"); }
                                 else
                                 {
+                                    Console.Write("\nEnter ID to make payment: ");
                                     string choice = Console.ReadLine();
+                                    Reservation reservation= null;
+                                    foreach(Reservation r in guest.reservations)
+                                    {
+                                        if(choice == r.reservationID.ToString())
+                                        {
+                                            reservation = r;
+                                            break;
+                                        }
+                                    }
+                                    if(reservation != null) { reservation.MakePayment(reservation); }
+                                    else { Console.WriteLine("\nInvalid Choice.\n"); }
+
                                 }
                             }
                             else if (answer == "5")
+                            {
+                                if(guest.reservations.Count == 0) { Console.WriteLine("\nYou currently have no reservations."); }
+
+                                int count = 1;
+                                foreach(Reservation r in guest.reservations)
+                                {
+                                    if(r.reservationState is ConfirmedState)
+                                    {
+                                        if(count == 1) { Console.WriteLine("\n----------------------------Reservations----------------------------"); }
+                                        Console.WriteLine("ID: " + r.reservationID + " |Hotel: " + r.room.Hotel.hotelType + " | Room: " + r.room.roomType + " | Cost: $" + r.reservationCost + " | " + r.checkInDate.ToShortDateString() + " - " + r.checkOutDate.ToShortDateString());
+                                    }
+                                    count++;
+                                }
+                                if (count == 1) { Console.WriteLine("\nNo reservations that require payment"); }
+                                else
+                                {
+                                    Console.Write("Enter ID to Check In: ");
+                                    string choice = Console.ReadLine();
+                                    Reservation reservation = null;
+                                    foreach(Reservation r in guest.reservations)
+                                    {
+                                        if(choice == r.reservationID.ToString())
+                                        {
+                                            reservation = r; 
+                                            break;
+                                        }
+                                    }
+                                    if (reservation != null) { reservation.CheckIn(reservation); }
+                                    else { Console.WriteLine("\nInvalid Choice.\n"); }
+                                }
+                            }
+                            else if (answer == "6")
+                            {
+                                if (guest.reservations.Count == 0) { Console.WriteLine("\nYou currently have no reservations."); }
+
+                                int count = 1;
+                                foreach (Reservation r in guest.reservations)
+                                {
+                                    if (r.reservationState is ConfirmedState)
+                                    {
+                                        if (count == 1) { Console.WriteLine("\n----------------------------Reservations----------------------------"); }
+                                        Console.WriteLine("ID: " + r.reservationID + " |Hotel: " + r.room.Hotel.hotelType + " | Room: " + r.room.roomType + " | Cost: $" + r.reservationCost + " | " + r.checkInDate.ToShortDateString() + " - " + r.checkOutDate.ToShortDateString());
+                                    }
+                                    count++;
+                                }
+                                if (count == 1) { Console.WriteLine("\nNo reservations that require payment"); }
+                                else
+                                {
+                                    Console.Write("Enter ID to Check Out: ");
+                                    string choice = Console.ReadLine();
+                                    Reservation reservation = null;
+                                    foreach (Reservation r in guest.reservations)
+                                    {
+                                        if (choice == r.reservationID.ToString())
+                                        {
+                                            reservation = r;
+                                            break;
+                                        }
+                                    }
+                                    if (reservation != null) { reservation.CheckOut(reservation); }
+                                    else { Console.WriteLine("\nInvalid Choice.\n"); }
+                                }
+                            }
+                            else if (answer == "7")
                             {
                                 guest = null;
                                 break;

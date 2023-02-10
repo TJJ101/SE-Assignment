@@ -8,6 +8,9 @@ namespace SE_ASG
 {
     public interface IReservationState
     {
-        void SetReservationStatus();
+        void CancelReservation();
+        void MakePayment(Reservation r);
+        void CheckIn(Reservation r);
+        void CheckOut(Reservation r);
     }
 }

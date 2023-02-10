@@ -58,7 +58,6 @@ namespace SE_ASG
             return reuturnedGuest;
         }
 
-        // Add this in class diagram
         public void Browse(List<Hotel> hotels)
         {
             Console.WriteLine("\nAvailable Hotels:");
@@ -128,7 +127,7 @@ namespace SE_ASG
                                         answer = Console.ReadLine().ToLower();
                                         if (answer == "y")
                                         {
-                                            MakePayment(newReservation);
+                                            newReservation.MakePayment(newReservation);
                                         }
                                         Console.WriteLine("\nReservation made");
                                     }
@@ -161,19 +160,22 @@ namespace SE_ASG
         {
             if (reservations.Count > 0)
             {
-                Console.WriteLine("\nReservations:\n---------------------");
+                Console.WriteLine("\nReservations:\n-----------------------------------------------");
                 int index = 1;
                 foreach (Reservation r in reservations)
                 {
                     if (r.cancelledReservation)
                     {
-                        Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID + " (cancelled)");
+                        Console.WriteLine("ID: " + r.reservationID + " |Hotel: " + r.room.Hotel.hotelType + " | Room: " + r.room.roomType + " | Cost: $" + r.reservationCost + " | " + r.checkInDate.ToShortDateString() + " - " + r.checkOutDate.ToShortDateString() + " (cancelled)");
                     }
-                    else { Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID); }
-                    
-                }
-                Console.WriteLine("\nSelect a Reservation ID to display details:\n---------------------");
+                    else 
+                    {
+                        Console.WriteLine("ID: " + r.reservationID + " |Hotel: " + r.room.Hotel.hotelType + " | Room: " + r.room.roomType + " | Cost: $" + r.reservationCost + " | " + r.checkInDate.ToShortDateString() + " - " + r.checkOutDate.ToShortDateString());
+                    }
 
+                }
+
+                Console.Write("\n-----------------------------------------------------------------\nSelect a Reservation ID to display details: ");
                 string answer = Console.ReadLine();
                 var isNumeric = int.TryParse(answer, out int n);
 
@@ -236,49 +238,49 @@ namespace SE_ASG
             else { Console.WriteLine("\nThere are no reservations"); }
         }
 
-        public void MakePayment(Reservation r)
-        {
-            Console.WriteLine("\n------------Payment-----------");
-            Console.WriteLine("Current Balance: $" + balance);
-            Console.WriteLine("Payment Amount: $" + r.reservationCost);
-            if (balance - r.reservationCost <= 0)
-            {
-                Console.WriteLine("Currently you have insufficient balance.\n");
-                Console.WriteLine("You have 2 options:");
-                Console.WriteLine("1) Do you wish to pay $" + balance + " and pay the rest later");
-                Console.WriteLine("2) Pay later");
-                Console.WriteLine("-----------------");
-                string answer = Console.ReadLine();
+        //public void MakePayment(Reservation r)
+        //{
+        //    Console.WriteLine("\n------------Payment-----------");
+        //    Console.WriteLine("Current Balance: $" + balance);
+        //    Console.WriteLine("Payment Amount: $" + r.reservationCost);
+        //    if (balance - r.reservationCost <= 0)
+        //    {
+        //        Console.WriteLine("Currently you have insufficient balance.\n");
+        //        Console.WriteLine("You have 2 options:");
+        //        Console.WriteLine("1) Do you wish to pay $" + balance + " and pay the rest later");
+        //        Console.WriteLine("2) Pay later");
+        //        Console.WriteLine("-----------------");
+        //        string answer = Console.ReadLine();
 
-                if (answer == "1")
-                {
-                    Console.Write("Confirm Payment? (Y/N): ");
-                    answer = Console.ReadLine().ToLower();
-                    if (answer == "y")
-                    {
-                        r.pay.AmountPaid = balance;
-                        balance = 0;
-                        Console.WriteLine("\nRemaining payment cost: $" + (r.reservationCost - r.pay.AmountPaid));
-                        Console.WriteLine("Please Top up balance and pay the remainder before your check in\n");
-                    }
-                    else { Console.WriteLine("Exiting payment\n"); }
-                }
-                else { Console.WriteLine("Exiting payment\n"); }
-            }
-            else
-            {
-                Console.WriteLine("Remainder: $" + (balance - r.reservationCost));
-                Console.Write("Confirm payment? (Y/N): ");
-                string answer = Console.ReadLine().ToLower();
-                if (answer == "y")
-                {
-                    r.pay.AmountPaid = r.reservationCost;
-                    balance -= r.reservationCost;
-                    r.paymentMade = true;
-                    Console.WriteLine("Payment successfully made!");
-                    r.SetReservationStatus();
-                }
-            }
-        }
+        //        if (answer == "1")
+        //        {
+        //            Console.Write("Confirm Payment? (Y/N): ");
+        //            answer = Console.ReadLine().ToLower();
+        //            if (answer == "y")
+        //            {
+        //                r.pay.AmountPaid = balance;
+        //                balance = 0;
+        //                Console.WriteLine("\nRemaining payment cost: $" + (r.reservationCost - r.pay.AmountPaid));
+        //                Console.WriteLine("Please Top up balance and pay the remainder before your check in\n");
+        //            }
+        //            else { Console.WriteLine("Exiting payment\n"); }
+        //        }
+        //        else { Console.WriteLine("Exiting payment\n"); }
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Remainder: $" + (balance - r.reservationCost));
+        //        Console.Write("Confirm payment? (Y/N): ");
+        //        string answer = Console.ReadLine().ToLower();
+        //        if (answer == "y")
+        //        {
+        //            r.pay.AmountPaid = r.reservationCost;
+        //            balance -= r.reservationCost;
+        //            r.paymentMade = true;
+        //            Console.WriteLine("Payment successfully made!");
+        //            r.SetReservationStatus();
+        //        }
+        //    }
+        //}
     }
 }

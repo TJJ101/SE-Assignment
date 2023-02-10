@@ -20,6 +20,8 @@ namespace SE_ASG
         //need to add this payment made into class diagram
         public bool paymentMade { get; set; }
 
+        public bool checkedIn { get; set; }
+        public bool checkedOut { get; set; }
         private Guest guest;
         public Payment pay { get; set; }
 
@@ -99,21 +101,58 @@ namespace SE_ASG
             Console.WriteLine("Status: " + state);
         }
 
-        public void SetReservationStatus()
+        //public void SetReservationStatus()
+        //{
+        //    reservationState.SetReservationStatus();
+
+        //    if(reservationState is SubmittedState)
+        //    {
+        //        // check if payment has been made
+        //        if (paymentMade == true) 
+        //        {
+        //            reservationState = new ConfirmedState();
+        //        }
+        //        else
+        //        {
+        //            reservationState = new SubmittedState();
+        //        }
+        //    }
+        //}
+
+        public void CancelReservation()
         {
-            reservationState.SetReservationStatus();
+            reservationState.CancelReservation();
+        }
+
+        public void MakePayment(Reservation r)
+        {
+            reservationState.MakePayment(r);
 
             if(reservationState is SubmittedState)
             {
-                // check if payment has been made
-                if (paymentMade == true) 
+                if(this.pay.AmountPaid == this.reservationCost && this.paymentMade)
                 {
                     reservationState = new ConfirmedState();
                 }
-                else
-                {
-                    reservationState = new SubmittedState();
-                }
+            }
+        }
+
+        public void CheckIn(Reservation r)
+        {
+            reservationState.CheckIn(r);
+
+            if(reservationState is ConfirmedState)
+            {
+
+            }
+        }
+        public void CheckOut(Reservation r)
+        {
+            reservationState.CheckOut(r);
+
+            if (reservationState is ConfirmedState)
+            {
+                if(checkedIn && checkedOut) { reservationState = new FulfilledState(); }
             }
         }
     }
