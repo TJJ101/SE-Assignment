@@ -61,8 +61,8 @@ namespace SE_ASG
 
         public bool SetCancelReservation()
         {
-            Console.WriteLine("Are you sure you want to cancel? (y/n)");
-            string answer = Console.ReadLine();
+            Console.Write("Are you sure you want to cancel? (Y/N): ");
+            string answer = Console.ReadLine().ToLower();
 
             DateTime now = DateTime.Now;
 
@@ -109,6 +109,10 @@ namespace SE_ASG
                 if (paymentMade == true) 
                 {
                     reservationState = new ConfirmedState();
+                }
+                else
+                {
+                    reservationState = new SubmittedState();
                 }
             }
         }
