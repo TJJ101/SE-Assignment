@@ -7,10 +7,7 @@ namespace SE_Assignment
 {
     public class SubmittedState : IReservationState
     {
-        public void CancelReservation()
-        {
-            
-        }
+        public void CancelReservation(Reservation r) { Console.WriteLine("Can't cancel a submitted reservation."); }
         public void MakePayment(Reservation r)
         {
             Console.WriteLine("\n------------Payment-----------");
@@ -54,13 +51,7 @@ namespace SE_Assignment
                 }
             }
         }
-        public void CheckIn(Reservation r)
-        {
-            Console.WriteLine("Please make payment before checking in.");
-        }
-        public void CheckOut(Reservation r) 
-        {
-            Console.WriteLine("Please make payment before checking out");
-        }
+        public void CheckIn(Reservation r) { Console.WriteLine("Please make payment before checking in."); }
+        public void CheckOut(Reservation r) { Console.WriteLine("Please make payment before checking out"); }
     }
 }

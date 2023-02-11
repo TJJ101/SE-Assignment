@@ -77,7 +77,7 @@ namespace SE_ASG
         // add this into class diagram
         public void DisplayRooms()
         {
-            Console.WriteLine("\n-------- Rooms --------");
+            Console.WriteLine("\n---------------------- Rooms ----------------------");
             string text;
             foreach (Room r in rooms)
             {

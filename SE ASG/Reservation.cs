@@ -10,14 +10,11 @@ namespace SE_ASG
 {
     public class Reservation : IReservationState
     {
-        // changed the reservation ID to int (need change in class diagram)
         public int reservationID { get; set; }
         public DateTime checkInDate { get; set; }
         public DateTime checkOutDate { get; set; }
         public bool cancelledReservation { get; set; }
         public double reservationCost { get; set; }    
-
-        //need to add this payment made into class diagram
         public bool paymentMade { get; set; }
 
         public bool checkedIn { get; set; }
@@ -61,67 +58,56 @@ namespace SE_ASG
             pay = new Payment(this);
         }
 
-        public bool SetCancelReservation()
-        {
-            Console.Write("Are you sure you want to cancel? (Y/N): ");
-            string answer = Console.ReadLine().ToLower();
+        //public bool SetCancelReservation()
+        //{
+        //    Console.Write("Are you sure you want to cancel? (Y/N): ");
+        //    string answer = Console.ReadLine().ToLower();
 
-            DateTime now = DateTime.Now;
+        //    DateTime now = DateTime.Now;
 
-            if (answer == "y" && (checkInDate - now).TotalDays >= 2 && cancelledReservation == false)
-            {
-                cancelledReservation = true;
-                guest.balance += reservationCost;
-                room.availability = true;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //    if (answer == "y" && (checkInDate - now).TotalDays >= 2 && cancelledReservation == false)
+        //    {
+        //        cancelledReservation = true;
+        //        guest.balance += reservationCost;
+        //        room.availability = true;
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
 
-        // add this into class diagram
+        // Display Details of Reservation
         public void DisplayDetails()
         {
-            string state = "";
+            string state = ""; string inTxt = ""; string outTxt;
             if(reservationState is SubmittedState) { state = "Submitted\nPlease make payment before check in"; }
             else if (reservationState is ConfirmedState) { state = "Confirmed\nPlease check in on " + checkInDate.ToShortDateString() + " after 2pm"; }
             else if ( reservationState is CancelledState) { state = "Cancelled"; }
             else if ( reservationState is FulfilledState) { state = "Fulfilled"; }
             else if (reservationState is NoShowState) { state = "No Show"; }
+
+            if(checkedIn) { inTxt = " (Checked In)"; } else { inTxt = " (Not Checked In)"; }
+            if(checkedOut) { outTxt = " (Checked Out)"; } else { outTxt = " (Not Checked Out)"; }
             Console.WriteLine("\n-------- Details --------");
             Console.WriteLine("Reservation ID: " + reservationID);
             Console.WriteLine("Location: " + room.Hotel.hotelAddress);
-            Console.WriteLine("Check in date: " + checkInDate.ToShortDateString());
-            Console.WriteLine("Check out date: " + checkOutDate.ToShortDateString());
+            Console.WriteLine("Check in date: " + checkInDate.ToShortDateString() + inTxt);
+            Console.WriteLine("Check out date: " + checkOutDate.ToShortDateString() + outTxt);
             Console.WriteLine("Reservation Cost: $" + reservationCost);
             Console.WriteLine("Is cancelled: " + cancelledReservation);
-            Console.WriteLine("Payment made: "+ paymentMade +"");
+            Console.WriteLine("Payment made: "+ paymentMade);
             Console.WriteLine("Status: " + state);
         }
 
-        //public void SetReservationStatus()
-        //{
-        //    reservationState.SetReservationStatus();
-
-        //    if(reservationState is SubmittedState)
-        //    {
-        //        // check if payment has been made
-        //        if (paymentMade == true) 
-        //        {
-        //            reservationState = new ConfirmedState();
-        //        }
-        //        else
-        //        {
-        //            reservationState = new SubmittedState();
-        //        }
-        //    }
-        //}
-
-        public void CancelReservation()
+        public void CancelReservation(Reservation r)
         {
-            reservationState.CancelReservation();
+            reservationState.CancelReservation(r);
+            if(reservationState is ConfirmedState)
+            {
+                reservationState = new CancelledState();
+            }
         }
 
         public void MakePayment(Reservation r)
@@ -143,7 +129,10 @@ namespace SE_ASG
 
             if(reservationState is ConfirmedState)
             {
-
+                if(!checkedIn && DateTime.Now.Date > checkInDate.Date)
+                {
+                    reservationState = new NoShowState();
+                }
             }
         }
         public void CheckOut(Reservation r)

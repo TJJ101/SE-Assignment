@@ -87,26 +87,29 @@ namespace SE_ASG
                                 DateTime dateTime;
                                 DateTime checkIn = DateTime.Now;
                                 DateTime checkOut = DateTime.Now;
+                                DateTime today = DateTime.Now;
 
                                 Console.Write("\nSelect a check in date (dd/mm/yyyy): ");
                                 answer = Console.ReadLine();
-                                if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+                                if (DateTime.TryParseExact(answer + " " + today.ToLongTimeString(), "dd/MM/yyyy HH:mm:ss tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
                                 {
-                                    checkIn = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    checkIn = DateTime.ParseExact(answer + " " + today.ToLongTimeString(), "dd/MM/yyyy HH:mm:ss tt", CultureInfo.InvariantCulture);
                                 }
                                 else { Console.WriteLine("\nInvalid Input"); break; }
 
 
                                 Console.Write("Select a check out date (dd/mm/yyyy): ");
                                 answer = Console.ReadLine();
-                                if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+                                if (DateTime.TryParseExact(answer + " " + today.ToLongTimeString(), "dd/MM/yyyy HH:mm:ss tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
                                 {
-                                    checkOut = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                    checkOut = DateTime.ParseExact(answer + " " + today.ToLongTimeString(),"dd/MM/yyyy HH:mm:ss tt", CultureInfo.InvariantCulture);
                                 }
                                 else { Console.WriteLine("\nInvalid Input"); break; }
 
-                                if (checkIn != DateTime.Now && checkOut != DateTime.Now)
+                                if (checkIn != DateTime.Now && checkOut != DateTime.Now && checkOut.Date > checkIn.Date)
                                 {
+                                    Console.WriteLine("\n" + checkIn.ToString() + " - " + checkOut.ToString() + "\n");
+
                                     int id = reservations.Count();
                                     Console.WriteLine("\n\n--------Reservation Details--------------");
                                     Console.WriteLine("Check-in Date: " + checkIn.ToShortDateString());
@@ -160,7 +163,7 @@ namespace SE_ASG
         {
             if (reservations.Count > 0)
             {
-                Console.WriteLine("\nReservations:\n-----------------------------------------------");
+                Console.WriteLine("\nReservations:\n-----------------------------------------------------------------");
                 int index = 1;
                 foreach (Reservation r in reservations)
                 {
@@ -175,7 +178,7 @@ namespace SE_ASG
 
                 }
 
-                Console.Write("\n-----------------------------------------------------------------\nSelect a Reservation ID to display details: ");
+                Console.Write("-----------------------------------------------------------------\nSelect a Reservation ID to display details: ");
                 string answer = Console.ReadLine();
                 var isNumeric = int.TryParse(answer, out int n);
 
@@ -197,45 +200,45 @@ namespace SE_ASG
 
         public void CancelReservation()
         {
-            bool result = false;
-            bool cancellationAvailable = false;
+            //bool result = false;
+            //bool cancellationAvailable = false;
 
 
-            if (reservations.Count > 0)
-            {
-                Console.WriteLine("\nReservations:\n---------------------");
-                int index = 1;
+            //if (reservations.Count > 0)
+            //{
+            //    Console.WriteLine("\nReservations:\n---------------------");
+            //    int index = 1;
 
-                foreach (Reservation r in reservations)
-                {
-                    if (!r.cancelledReservation)
-                    {
-                        Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID);
-                        cancellationAvailable = true;
-                    }
+            //    foreach (Reservation r in reservations)
+            //    {
+            //        if (!r.cancelledReservation)
+            //        {
+            //            Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID);
+            //            cancellationAvailable = true;
+            //        }
                     
-                }
+            //    }
 
-                if (cancellationAvailable)
-                {
-                    Console.WriteLine("\nPlease enter ID of reservation to cancel: ");
-                    string answer = Console.ReadLine();
+            //    if (cancellationAvailable)
+            //    {
+            //        Console.WriteLine("\nPlease enter ID of reservation to cancel: ");
+            //        string answer = Console.ReadLine();
 
-                    foreach (Reservation r in reservations)
-                    {
-                        if (r.reservationID == Convert.ToInt32(answer))
-                        {
-                            result = r.SetCancelReservation();
-                        }
-                    }
+            //        foreach (Reservation r in reservations)
+            //        {
+            //            if (r.reservationID == Convert.ToInt32(answer))
+            //            {
+            //                result = r.SetCancelReservation();
+            //            }
+            //        }
 
-                    if (result) { Console.WriteLine("\nCancellation Successfull"); }
-                    else { Console.WriteLine("\nCancellation Error"); }
-                }
-                else { Console.WriteLine("\nThere are no reservations"); }
+            //        if (result) { Console.WriteLine("\nCancellation Successfull"); }
+            //        else { Console.WriteLine("\nCancellation Error"); }
+            //    }
+            //    else { Console.WriteLine("\nThere are no reservations"); }
 
-            }
-            else { Console.WriteLine("\nThere are no reservations"); }
+            //}
+            //else { Console.WriteLine("\nThere are no reservations"); }
         }
 
         //public void MakePayment(Reservation r)
