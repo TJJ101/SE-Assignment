@@ -50,7 +50,21 @@ namespace SE_ASG
                         while (true)
                         {
                             // probably need to check for user type as well
+                            Console.WriteLine("\nPlease choose an option (1 - 8): \n1) View Profile\n2) Browse  \n3) View Reservations\n4) Cancel Reservations\n5) Make Payment\n6) Check In\n7) Check Out\n8) Logout");
+                            Console.WriteLine("--------------------------");
                             answer = Console.ReadLine();
+
+                            // View Profile
+                            if (answer == "1") { guest.ViewDetails(); }
+
+                            /// Browse Hotel
+                            if (answer == "2") { guest.Browse(hotels); }
+
+                            // View Bookings
+                            else if (answer == "3") { guest.ViewBookings(); }
+
+                            // Cancel Reservation
+                            else if (answer == "4") 
                             {
                                     }
                                         {
@@ -59,7 +73,7 @@ namespace SE_ASG
                             }
 
                             //Make Payment
-                            else if (answer == "4")
+                            else if (answer == "5")
                             {
                                     }
                                 }
@@ -79,11 +93,11 @@ namespace SE_ASG
                                     else { Console.WriteLine("\nInvalid Choice.\n"); }
                                 }
                             }
-                            else if (answer == "5")
+                            else if (answer == "6")
                             {
                                 }
                             }
-                            else if (answer == "6")
+                            else if (answer == "7")
                             {
                                         }
 
@@ -106,7 +120,7 @@ namespace SE_ASG
                                     }
                                 }
                             }
-                            else if (answer == "7") { guest = null; break; }
+                            else if (answer == "8") { guest = null; break; }
                         }
                     }
                     else { Console.WriteLine("Login Error"); }

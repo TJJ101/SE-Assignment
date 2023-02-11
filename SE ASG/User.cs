@@ -17,7 +17,7 @@ namespace SE_ASG
 
         // Need to add this to class diagram
         void ViewBookings();
-        //void ViewDetails();
+        void ViewDetails();
 
         void ViewDetails();
     }
