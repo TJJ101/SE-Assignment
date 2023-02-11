@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SE_ASG
 {
-    public class Admin : IUser
+    public class Admin : IUser, IObserver
     {
         private string name;
         private string password;
@@ -28,10 +28,16 @@ namespace SE_ASG
             // to be implemented
         }
 
-        public void Update(int rating, string review, string id)
+        //Concrete update method to update administrators of review and rating updates. By S10194048D Daryl Chong Teck Yuan
+        public void Update(int rating, string review, string hotelid)
         {
-            //id is hotelId
-            // to be implemented
+            Console.WriteLine("");
+            Console.WriteLine("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+            Console.WriteLine("Administrator's POV:");
+            Console.WriteLine("A Customer has left a review for hotelID " + hotelid + ":");
+            Console.WriteLine("Rating: " + rating);
+            Console.WriteLine("Review: " + review);
+            Console.WriteLine("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
         }
 
         public Guest Login(List<Guest> guestList) { return null; }
@@ -47,5 +53,6 @@ namespace SE_ASG
 
         // add this to class diageam
         public void ViewDetails() { }
+
     }
 }

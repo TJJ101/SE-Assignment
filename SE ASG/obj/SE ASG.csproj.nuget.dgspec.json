@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Year 3\\Semester 2\\SE\\Assignment\\SE-Assignment\\SE ASG\\SE ASG.csproj": {}
+    "E:\\Users\\equin\\Desktop\\SE 2022\\Assignment\\SEAssignmentLegit\\SE-Assignment\\SE ASG\\SE ASG.csproj": {}
   },
   "projects": {
-    "D:\\Year 3\\Semester 2\\SE\\Assignment\\SE-Assignment\\SE ASG\\SE ASG.csproj": {
+    "E:\\Users\\equin\\Desktop\\SE 2022\\Assignment\\SEAssignmentLegit\\SE-Assignment\\SE ASG\\SE ASG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Year 3\\Semester 2\\SE\\Assignment\\SE-Assignment\\SE ASG\\SE ASG.csproj",
+        "projectUniqueName": "E:\\Users\\equin\\Desktop\\SE 2022\\Assignment\\SEAssignmentLegit\\SE-Assignment\\SE ASG\\SE ASG.csproj",
         "projectName": "SE ASG",
-        "projectPath": "D:\\Year 3\\Semester 2\\SE\\Assignment\\SE-Assignment\\SE ASG\\SE ASG.csproj",
-        "packagesPath": "C:\\Users\\Tan Jun Jie\\.nuget\\packages\\",
-        "outputPath": "D:\\Year 3\\Semester 2\\SE\\Assignment\\SE-Assignment\\SE ASG\\obj\\",
+        "projectPath": "E:\\Users\\equin\\Desktop\\SE 2022\\Assignment\\SEAssignmentLegit\\SE-Assignment\\SE ASG\\SE ASG.csproj",
+        "packagesPath": "C:\\Users\\equin\\.nuget\\packages\\",
+        "outputPath": "E:\\Users\\equin\\Desktop\\SE 2022\\Assignment\\SEAssignmentLegit\\SE-Assignment\\SE ASG\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Tan Jun Jie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "E:\\Users\\equin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

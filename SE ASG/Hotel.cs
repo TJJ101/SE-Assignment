@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace SE_ASG
 {
-    public class Hotel
+    public class Hotel : ISubject
     {
         // missing average rating
 
         // added hotel id from class diagram
-        public int hotelID { get; set; }
+        public string hotelID { get; set; }
         public string hotelType { get; set; }
+        private int rating;
+        private string review = "NIL";
+        private List<IObserver> observers = new List<IObserver>(); //Creates a list of observers
 
         // can remove available room from class diagram
         public int avaliableRooms { get; set; }
@@ -26,7 +29,7 @@ namespace SE_ASG
             rooms = new List<Room>();
         }
 
-        public Hotel(int id, string type, bool allowV, string addr)
+        public Hotel(string id, string type, bool allowV, string addr)
         {
             hotelID = id;
             hotelType = type;
@@ -107,5 +110,43 @@ namespace SE_ASG
             }
             return null;
         }
+
+        // Start of S10194048D Daryl Chong Teck Yuan's code------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //Adds a new observer to the list of observers in runtime
+        public void Attach(IObserver observer)
+        {
+            observers.Add(observer);
+        }
+
+        //Removes an observer from the list of observers in runtime, not being utilised but leaving it here just in case.
+        public void Detach(IObserver observer)
+        {
+            observers.Remove(observer);
+        }
+
+        //Updates information of subject class to observers, which in this case is the admin class.
+        public void Notify()
+        {
+            foreach (var observer in observers)
+            {
+                observer.Update(rating, review, hotelID);
+            }
+        }
+
+        //Method to update ratings to observers.
+        public void UpdateRatings(int rating)
+        {
+            this.rating = rating;
+            Notify();
+        }
+
+        //Method to update both rating and review to observers
+        public void UpdateReview(string review, int rating)
+        {
+            this.review = review;
+            this.rating = rating;
+            Notify();
+        }
+        // End of S10194048D Daryl Chong Teck Yuan's code------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     }
 }

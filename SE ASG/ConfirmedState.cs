@@ -29,11 +29,15 @@ namespace SE_Assignment
         public void CheckIn(Reservation r)
         {
             //DateTime today = DateTime.Now;
+<<<<<<< HEAD
 
             //for checking against today's date
             DateTime today = DateTime.Parse("2/5/2023 3:00:00 PM");
 
             //for checking against today's time
+=======
+            DateTime today = DateTime.Parse("2/5/2023 5:00:00 PM");
+>>>>>>> b029de3a4dd3af0cc7261f0009e21b9988ead3c4
             DateTime checkDate = DateTime.Parse(r.checkInDate.ToShortDateString() + " 02:00:00 PM");
 
             if (r.checkedIn) { Console.WriteLine("Already checked in."); }
@@ -49,10 +53,14 @@ namespace SE_Assignment
         public void CheckOut(Reservation r)
         {
             //DateTime today = DateTime.Now;
+<<<<<<< HEAD
 
             //for checking against today's date
             DateTime today = DateTime.Parse("10/5/2023 9:00:00 AM");
             //for checking against today's time
+=======
+            DateTime today = DateTime.Parse("5/5/2023 9:00:00 AM");
+>>>>>>> b029de3a4dd3af0cc7261f0009e21b9988ead3c4
             DateTime checkDate = DateTime.Parse(r.checkInDate.ToShortDateString() + " 12:00:00 PM");
 
             if (!r.checkedIn) { Console.WriteLine("Can't check out as you haven't checked in yet."); }
