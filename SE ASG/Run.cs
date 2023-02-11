@@ -56,7 +56,7 @@ namespace SE_ASG
                         while (true)
                         {
                             // probably need to check for user type as well
-                            Console.WriteLine("\nPlease choose an option (1 - 8): \n1)View Profile \n2) Browse  \n3) View Reservations\n4) Cancel Reservations\n5) Make Payment\n6) Check In\n7) Check Out\n8) Logout");
+                            Console.WriteLine("\nPlease choose an option (1 - 8): \n1) View Profile \n2) Browse  \n3) View Reservations\n4) Cancel Reservations\n5) Make Payment\n6) Check In\n7) Check Out\n8) Logout");
                             Console.WriteLine("--------------------------");
                             answer = Console.ReadLine();
 
