@@ -56,7 +56,7 @@ namespace SE_ASG
                         while (true)
                         {
                             // probably need to check for user type as well
-                            Console.WriteLine("\nPlease choose an option (1 - 8): \n1)View Profile \n2) Browse  \n3) View Reservations\n4) Cancel Reservations\n5) Make Payment\n6) Check In\n7) Check Out\n8) Logout");
+                            Console.WriteLine("\nPlease choose an option (1 - 8): \n1) View Profile \n2) Browse  \n3) View Reservations\n4) Cancel Reservations\n5) Make Payment\n6) Check In\n7) Check Out\n8) Logout");
                             Console.WriteLine("--------------------------");
                             answer = Console.ReadLine();
 
@@ -69,7 +69,7 @@ namespace SE_ASG
                             else if (answer == "3") { guest.ViewBookings(); }
 
                             // Cancel Reservation
-                            else if (answer == "4") 
+                            else if (answer == "4")
                             {
 
                                 if (guest.reservations.Count == 0) { Console.WriteLine("\nThere are no reservations"); }
@@ -96,7 +96,7 @@ namespace SE_ASG
                                             if (answer == r.reservationID.ToString()) { reservation = r; break; }
                                         }
 
-                                        if (reservation != null) 
+                                        if (reservation != null)
                                         {
                                             Console.Write("Are you sure you want to cancel? (Y/N): ");
                                             answer = Console.ReadLine().ToLower();
@@ -128,28 +128,28 @@ namespace SE_ASG
                                 {
                                     Console.Write("\nEnter ID to make payment: ");
                                     string choice = Console.ReadLine();
-                                    Reservation reservation= null;
-                                    foreach(Reservation r in guest.reservations)
+                                    Reservation reservation = null;
+                                    foreach (Reservation r in guest.reservations)
                                     {
                                         //return r if id matches, breaks foreach loop
                                         if (choice == r.reservationID.ToString()) { reservation = r; break; }
                                     }
-                                    if(reservation != null) { reservation.MakePayment(reservation); }
+                                    if (reservation != null) { reservation.MakePayment(reservation); }
                                     else { Console.WriteLine("\nInvalid Choice.\n"); }
                                 }
                             }
                             else if (answer == "6")
                             {
-                                if(guest.reservations.Count == 0) { Console.WriteLine("\nYou currently have no reservations."); }
+                                if (guest.reservations.Count == 0) { Console.WriteLine("\nYou currently have no reservations."); }
                                 else
                                 {
                                     bool check = false;
-                                    foreach(Reservation r in guest.reservations)
+                                    foreach (Reservation r in guest.reservations)
                                     {
-                                        if(r.reservationState is ConfirmedState)
+                                        if (r.reservationState is ConfirmedState)
                                         {
                                             //print header only on first finding a reservation that matches
-                                            if(!check) { check = true; Console.WriteLine("\n----------------------------Reservations----------------------------"); }
+                                            if (!check) { check = true; Console.WriteLine("\n----------------------------Reservations----------------------------"); }
                                             Console.WriteLine("ID: " + r.reservationID + " | Hotel: " + r.room.Hotel.hotelType + " | Room: " + r.room.roomType + " | Cost: $" + r.reservationCost + " | " + r.checkInDate.ToShortDateString() + " - " + r.checkOutDate.ToShortDateString());
                                         }
                                     }
@@ -159,7 +159,7 @@ namespace SE_ASG
                                         Console.Write("\nEnter ID to Check In: ");
                                         string choice = Console.ReadLine();
                                         Reservation reservation = null;
-                                        foreach(Reservation r in guest.reservations)
+                                        foreach (Reservation r in guest.reservations)
                                         {
                                             //return r if id matches, breaks foreach loop
                                             if (choice == r.reservationID.ToString()) { reservation = r; break; }
@@ -181,7 +181,7 @@ namespace SE_ASG
                                         if (r.reservationState is ConfirmedState)
                                         {
                                             //print header only on first finding a reservation that matches
-                                            if (!check) { check = true; Console.WriteLine("\n--------------------------- Reservations ---------------------------");}
+                                            if (!check) { check = true; Console.WriteLine("\n--------------------------- Reservations ---------------------------"); }
                                             Console.WriteLine("ID: " + r.reservationID + " | Hotel: " + r.room.Hotel.hotelType + " | Room: " + r.room.roomType + " | Cost: $" + r.reservationCost + " | " + r.checkInDate.ToShortDateString() + " - " + r.checkOutDate.ToShortDateString());
                                         }
                                     }
@@ -219,8 +219,9 @@ namespace SE_ASG
                         var test = new Guest { personalID = int.Parse(newguest[0]), email = newguest[1], number = newguest[2], balance = int.Parse(newguest[3]), password = newguest[4] };
                         guests.Add(test);
                     }
-            }         
+                }
 
+            }
         }
     }
 }

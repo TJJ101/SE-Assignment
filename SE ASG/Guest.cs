@@ -111,7 +111,8 @@ namespace SE_ASG
 
         public void ViewDetails()
         {
-
+            Console.WriteLine("\n--------- Profile ---------");
+            Console.WriteLine("Personal ID: "+ personalID +"\nEmail: "+ email +"\nBalance: "+ balance +"");
         }
 
         public void Browse(List<Hotel> hotels)
