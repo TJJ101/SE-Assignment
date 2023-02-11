@@ -10,15 +10,19 @@ namespace SE_ASG
         static void Main(string[] args)
         {
             string answer;
+            string leaveRatingCheck;
+            int guestHotelRatingInt;
+            string guestHotelRatingString; //Guest's rating when parsed to string.
+            string leaveReviewCheck;
 
             // Creating hotels
             List<Hotel> hotels = new List<Hotel>()
             {
-                new Hotel(1, "luxury", true, "Q Street"),
-                new Hotel(2, "themed", true, "W Street"),
-                new Hotel(3, "family-friendly", true, "E Street"),
-                new Hotel(4, "city", true, "R Street"),
-                new Hotel(5, "themed", true, "T Street")
+                new Hotel("1", "luxury", true, "Q Street"),
+                new Hotel("2", "themed", true, "W Street"),
+                new Hotel("3", "family-friendly", true, "E Street"),
+                new Hotel("4", "city", true, "R Street"),
+                new Hotel("5", "themed", true, "T Street")
             };
 
             // creating a guest
@@ -202,7 +206,84 @@ namespace SE_ASG
                                         }
 
                                         // if user input is valid and corresponds with a reservation, checkOut reservation
-                                        if (reservation != null) { reservation.CheckOut(reservation); }
+                                        if (reservation != null) {
+                                            reservation.CheckOut(reservation);
+                                            if (reservation.checkedOut)
+                                            {
+                                                // Start of S10194048D Daryl Chong Teck Yuan's code to begin interface to get users to leave a rating and or review------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                                //Attaching admin as an observer to the hotel object stated above.
+                                                reservation.room.Hotel.Attach(new Admin());
+
+                                                Console.WriteLine("We thank you for using BookHoliStay, would you like to leave a rating of the hotel that you stayed in? (y/n)");
+                                                leaveRatingCheck = Console.ReadLine();
+
+                                                //Check to see if guest wants to leave a rating, will continue looping if they enter anything other than y or n.
+                                                while (!leaveRatingCheck.Equals("y") && !leaveRatingCheck.Equals("n"))
+                                                {
+                                                    Console.WriteLine("");
+                                                    Console.WriteLine("Sorry, you have entered an invalid response, please input y if you would like to leave a rating, or n if you do not wish to leave a rating.");
+                                                    leaveRatingCheck = Console.ReadLine();
+                                                }
+                                                if (leaveRatingCheck == "y")
+                                                {
+                                                    Console.WriteLine("");
+                                                    Console.WriteLine("How much would you rate your stay from 1 to 5?");
+                                                    guestHotelRatingString = Console.ReadLine();
+
+                                                    //Will loop until user inputs a number in a range between 1-5.
+                                                    while (!guestHotelRatingString.Equals("1") && !guestHotelRatingString.Equals("2") && !guestHotelRatingString.Equals("3") && !guestHotelRatingString.Equals("4") && !guestHotelRatingString.Equals("5"))
+                                                    {
+                                                        Console.WriteLine("");
+                                                        Console.WriteLine("Sorry, you have entered an invalid response, please input a rating between 1-5 thank you.");
+                                                        guestHotelRatingString = Console.ReadLine();
+                                                    }
+                                                    guestHotelRatingInt = int.Parse(guestHotelRatingString);
+
+                                                    //Checking to see if guest have left a valid rating aka 1-5
+                                                    if (guestHotelRatingInt != 0)
+                                                    {
+                                                        Console.WriteLine("");
+                                                        Console.WriteLine("Would you like to leave a short comment regarding your stay experience? (y/n)");
+                                                        leaveReviewCheck = Console.ReadLine();
+                                                        //Check to see if guest wants to leave a rating, will continue looping if they enter anything other than y or n.
+                                                        while (!leaveReviewCheck.Equals("y") && !leaveReviewCheck.Equals("n"))
+                                                        {
+                                                            Console.WriteLine("");
+                                                            Console.WriteLine("Sorry, you have entered an invalid response, please input y if you would like to leave a review, or n if you do not wish to leave a rating.");
+                                                            leaveReviewCheck = Console.ReadLine();
+                                                        }
+                                                        if (leaveReviewCheck == "y")
+                                                        {
+                                                            Console.WriteLine("");
+                                                            Console.WriteLine("Please write out a short review of your stay experience be it good or bad.");
+                                                            string guestHotelReview = Console.ReadLine();
+
+                                                            Console.WriteLine("");
+                                                            Console.WriteLine("Review successfully submitted");
+                                                            Console.WriteLine("Thank you for taking the time to leave a rating and a review! Your actions are appreciated by the BookHoliStay team!");
+                                                            //Updates the rating and review details to observers.
+                                                            reservation.room.Hotel.UpdateReview(guestHotelReview, guestHotelRatingInt);
+                                                        }
+                                                        if (leaveReviewCheck == "n")
+                                                        {
+                                                            //Updates the rating details to observers.
+                                                            Console.WriteLine("");
+                                                            Console.WriteLine("Review successfully submitted");
+                                                            Console.WriteLine("Thank you for taking the time to leave a rating! Your actions are appreciated by the BookHoliStay team!");
+                                                            reservation.room.Hotel.UpdateRatings(guestHotelRatingInt);
+                                                        }
+                                                    }
+                                                }
+                                                //If user decides not to leave a rating.
+                                                else if (leaveRatingCheck == "n")
+                                                {
+                                                    Console.WriteLine("");
+                                                    Console.WriteLine("Understood. We hope to see you again!");
+                                                }
+                                                //End of S10194048D Daryl Chong Teck Yuan's code to begin interface to get users to leave a rating and or review------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                            }
+                                        }
                                         else { Console.WriteLine("\nInvalid Choice.\n"); }
                                     }
                                 }

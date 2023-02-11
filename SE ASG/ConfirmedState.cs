@@ -28,7 +28,8 @@ namespace SE_Assignment
         public void MakePayment(Reservation r) { Console.WriteLine("Reservation already paid."); }
         public void CheckIn(Reservation r)
         {
-            DateTime today = DateTime.Now;
+            //DateTime today = DateTime.Now;
+            DateTime today = DateTime.Parse("2/5/2023 5:00:00 PM");
             DateTime checkDate = DateTime.Parse(r.checkInDate.ToShortDateString() + " 02:00:00 PM");
 
             if (r.checkedIn) { Console.WriteLine("Already checked in."); }
@@ -43,7 +44,8 @@ namespace SE_Assignment
         }
         public void CheckOut(Reservation r)
         {
-            DateTime today = DateTime.Now;
+            //DateTime today = DateTime.Now;
+            DateTime today = DateTime.Parse("5/5/2023 9:00:00 AM");
             DateTime checkDate = DateTime.Parse(r.checkInDate.ToShortDateString() + " 12:00:00 PM");
 
             if (!r.checkedIn) { Console.WriteLine("Can't check out as you haven't checked in yet."); }
