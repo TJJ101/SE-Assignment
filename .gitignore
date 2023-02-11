@@ -1,2 +1,3 @@
 # VS file code
-.vs/*
+.vs/
+obj/
