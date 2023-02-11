@@ -15,6 +15,15 @@ namespace SE_ASG
             string guestHotelRatingString; //Guest's rating when parsed to string.
             string leaveReviewCheck;
 
+            // User List
+            List<IUser> userList = new List<IUser>()
+            {
+                new Admin(1, "elgin", "admin1", "admin1234"),
+                new Guest(1, "user1", "64323224", 10000, "pass1234"),
+                new Guest(2, "user2", "98765432", 500, "pass2345"),
+                new Guest(3, "user3", "97654321", 100, "pass3456")
+            };
+
             // Creating hotels
             List<Hotel> hotels = new List<Hotel>()
             {
@@ -25,13 +34,13 @@ namespace SE_ASG
                 new Hotel("5", "themed", true, "T Street")
             };
 
-            // creating a guest
-            List<Guest> guests = new List<Guest>
-            {
-                new Guest(1, "user1", "64323224", 10000, "pass1234"),
-                new Guest(2, "user2", "98765432", 500, "pass2345"),
-                new Guest(3, "user3", "97654321", 100, "pass3456")
-            };
+            //// creating a guest
+            //List<Guest> guests = new List<Guest>
+            //{
+            //    new Guest(1, "user1", "64323224", 10000, "pass1234"),
+            //    new Guest(2, "user2", "98765432", 500, "pass2345"),
+            //    new Guest(3, "user3", "97654321", 100, "pass3456")
+            //};
 
             // Creating rooms for each hotel
             foreach (Hotel h in hotels)
@@ -51,12 +60,31 @@ namespace SE_ASG
 
                 if (answer == "1")
                 {
-                    Guest guest = new Guest();
-                    guest = guest.Login(guests);
+                    Console.Write("\nEnter email: ");
+                    string email = Console.ReadLine();
 
-                    // changed login to return true (need change in class diagram). Might need to change login to return a guest so that we can use it to create resevations and stuff
-                    if (guest != null)
+                    Console.Write("Enter paswword: ");
+                    string password = Console.ReadLine();
+
+                    Guest guest = new Guest();
+                    int id = guest.Login(email, password, userList);
+
+
+                    // Varify login
+                    if(id > 0)
                     {
+                        for(int i =0; i < userList.Count(); i++)
+                        {
+                            if (userList[i] is Guest)
+                            {
+                                Guest g = (Guest)userList[i];
+                                if (g.personalID == id)
+                                {
+                                    guest = g;
+                                    break;
+                                }
+                            }
+                        }
                         while (true)
                         {
                             // probably need to check for user type as well
@@ -293,7 +321,12 @@ namespace SE_ASG
                             else if (answer == "8") { guest = null; break; }
                         }
                     }
-                    else { Console.WriteLine("Login Error"); }
+
+                    else 
+                    { 
+                        // Do Admin Login here
+                        Console.WriteLine("Login Error"); 
+                    }
                 }
 
                 // Register
@@ -301,12 +334,16 @@ namespace SE_ASG
                 {
                     Guest guestG = new Guest();
                     List<string> newguest = new List<string>();
-                    newguest = guestG.Register(guests);
-                    if (newguest == null) { continue; }
-                    else
+                    newguest = guestG.Register(userList);
+                    if (newguest != null)
                     {
                         var test = new Guest { personalID = int.Parse(newguest[0]), email = newguest[1], number = newguest[2], balance = int.Parse(newguest[3]), password = newguest[4] };
-                        guests.Add(test);
+                        userList.Add(test);
+                    }
+                    else
+                    {
+                        // Do Admin register here
+                        continue;
                     }
                 }
             }

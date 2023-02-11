@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE_Assignment;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -31,78 +32,83 @@ namespace SE_ASG
             reservations = new List<Reservation>();
         }
 
-        public Guest Login(List<Guest> guestList)
+        public int Login(string email, string pass, List<IUser> userList)
         {
-            Guest reuturnedGuest = null;
+            Guest returnedGuest = null;
+            int id = -1;
 
+            // Search userlist
+            for (int i = 0; i < userList.Count(); i++){
+
+                // if user is Guest
+                if (userList[i] is Guest)
+                {
+                    Guest g = (Guest)userList[i];
+
+                    // Check email and password
+                    if (email == g.email && pass == g.password) 
+                    { 
+                        returnedGuest = g; 
+                        break; 
+                    }
+                }
+            }
+            if (returnedGuest != null) { Console.WriteLine("\nLogged In"); id = returnedGuest.personalID; }
+            else { Console.WriteLine("\nEmail or passord is incorrect"); }
+
+            return id;
+        }
+        public List<string> Register(List<IUser> userList)
+        {
+            bool exist = false;
+            int x;
             Console.Write("\nEnter email: ");
             string email = Console.ReadLine();
 
-            Console.Write("Enter paswword: ");
-            string password = Console.ReadLine();
-
-            foreach (Guest g in guestList)
+            Console.Write("\nPersonal ID: ");
+            string result = Console.ReadLine();
+            while (!Int32.TryParse(result, out x))
             {
-                if (email == g.email && password == g.password)
-                {
-                    reuturnedGuest = g;              
-                }
-            }
-
-            if (reuturnedGuest != null) { Console.WriteLine("\nLogged In"); }
-            else { Console.WriteLine("\nEmail or passord is incorrect"); }
-
-            return reuturnedGuest;
-        }
-        public List<string> Register(List<Guest> guestList)
-        {
-            bool Exist = false;
-            int X;
-            Console.WriteLine("\nEnter email: ");
-            string email = Console.ReadLine();
-
-            Console.WriteLine("\nPersonal ID: ");
-            string Result = Console.ReadLine();
-            while (!Int32.TryParse(Result, out X))
-            {
-                Console.WriteLine("Not a valid number, try again.\nPersonal ID:");
-
-                Result = Console.ReadLine();
+                Console.Write("Not a valid number, try again.\nPersonal ID: ");
+                result = Console.ReadLine();
             }
 
 
-            Console.WriteLine("\nEnter Phone Number: ");
+            Console.Write("\nEnter Phone Number: ");
             string num = Console.ReadLine();
 
-            Console.WriteLine("\nEnter password: ");
+            Console.Write("\nEnter password: ");
             string password = Console.ReadLine();
 
-            Console.WriteLine("\nRetype passwword: ");
+            Console.Write("\nRetype passwword: ");
             string password2 = Console.ReadLine();
 
-            foreach (Guest g in guestList)
+            for(int i = 0; i < userList.Count(); i++)
             {
-                if (email == g.email)
+                if (userList[i] is Guest)
                 {
-                    Exist = true;
+                    Guest g = (Guest)userList[i];
+                    if (email == g.email)
+                    {
+                        exist = true;
+                        break;
+                    }
                 }
             }
 
-            if (Exist == true)
+            // Email already exist
+            if (exist) { Console.WriteLine("\nEmail exists in the database"); }
+
+            // Password mismatch
+            if (password != password2) { Console.WriteLine("\nPassword Mismatch"); }
+
+            // Empty Input
+            if (email == "" || num == "" || password == "" || password2 == "") { Console.WriteLine("\nPlease input all the informations required"); }
+
+            // Validate all fields, if pass, create List<string> of newly created guest
+            if (!exist && password == password2 && email != "" && num != "" && password != "" && password2 != "")
             {
-                Console.WriteLine("\nEmail exists in the database");
-            }
-            if (password != password2)
-            {
-                Console.WriteLine("\nPassword Mismatch");
-            }
-            if (email == "" || num == "" || password == "" || password2 == "")
-            {
-                Console.WriteLine("\nPlease input all the informations required");
-            }
-            if (Exist == false && password == password2 && email != "" && num != "" && password != "" && password2 != "")
-            {
-                List<string> guest = new List<string>() { Convert.ToString(X), email, num, "0", password };
+                List<string> guest = new List<string>() { Convert.ToString(x), email, num, "0", password };
                 Console.WriteLine("\nAccount successfully registered");
                 return guest;
             }
@@ -126,7 +132,7 @@ namespace SE_ASG
             {
                 if (answer == Convert.ToString(h.hotelID))
                 {
-                    if (h.avaliableRooms > 0)
+                    if (h.availableRooms > 0)
                     {
                         Console.Write("\nDo you want to view rooms? (Y/N): ");
                         answer = Console.ReadLine().ToLower();
@@ -137,7 +143,7 @@ namespace SE_ASG
                             h.DisplayRooms();
                             Console.WriteLine("\nPlease select a room: ");
                             answer = Console.ReadLine();
-                            Room room = h.getRoom(answer);
+                            Room room = h.GetRoom(answer);
 
                             if (room != null)
                             {
@@ -223,7 +229,7 @@ namespace SE_ASG
                 int index = 1;
                 foreach (Reservation r in reservations)
                 {
-                    if (r.cancelledReservation)
+                    if (r.reservationState is CancelledState)
                     {
                         Console.WriteLine("ID: " + r.reservationID + " |Hotel: " + r.room.Hotel.hotelType + " | Room: " + r.room.roomType + " | Cost: $" + r.reservationCost + " | " + r.checkInDate.ToShortDateString() + " - " + r.checkOutDate.ToShortDateString() + " (cancelled)");
                     }

@@ -13,7 +13,6 @@ namespace SE_ASG
         public int reservationID { get; set; }
         public DateTime checkInDate { get; set; }
         public DateTime checkOutDate { get; set; }
-        public bool cancelledReservation { get; set; }
         public double reservationCost { get; set; }    
         public bool paymentMade { get; set; }
 
@@ -45,7 +44,6 @@ namespace SE_ASG
             reservationID = id;
             checkInDate = cIn;
             checkOutDate = cOut;
-            cancelledReservation = false;
             paymentMade = false;
             guest = g;
             room = r;
@@ -76,7 +74,6 @@ namespace SE_ASG
             Console.WriteLine("Check in date: " + checkInDate.ToShortDateString() + inTxt);
             Console.WriteLine("Check out date: " + checkOutDate.ToShortDateString() + outTxt);
             Console.WriteLine("Reservation Cost: $" + reservationCost);
-            Console.WriteLine("Is cancelled: " + cancelledReservation);
             Console.WriteLine("Payment made: "+ paymentMade);
             Console.WriteLine("Status: " + state);
         }

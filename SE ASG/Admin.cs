@@ -8,19 +8,41 @@ namespace SE_ASG
 {
     public class Admin : IUser, IObserver
     {
+        private int adminId;
         private string name;
+        private string email;
         private string password;
+
+        public int AdminId
+        {
+            get { return adminId; }
+            set { adminId = value; }
+        }
 
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
-
+        public string Email
+        {
+            get { return email; }
+            set { email = value; }
+        }
+        
         public string Password
         {
             get { return password; }
             set { password = value; }
+        }
+        public Admin() { }
+
+        public Admin(int id, string n, string e, string pass)
+        {
+            adminId = id;
+            name = n;
+            email = e;
+            password = pass;
         }
 
         public void InformHotel()
@@ -40,18 +62,14 @@ namespace SE_ASG
             Console.WriteLine("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
         }
 
-        public Guest Login(List<Guest> guestList) { return null; }
+        public int Login(string email, string pass, List<IUser> guestList) { return -1; }
 
-        // I think might also need browse feature (for search and shit)
         public void Browse(List<Hotel> hotels) { }
 
-        // Need to add this to class diagram
         public void ViewBookings() { }
 
-        // Need to add this to class diagram
         public void CancelReservation() { }
 
-        // add this to class diageam
         public void ViewDetails() { }
 
     }

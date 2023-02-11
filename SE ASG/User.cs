@@ -8,7 +8,7 @@ namespace SE_ASG
 {
     public interface IUser
     {
-        Guest Login(List<Guest> guestList);
+        int Login(string email, string pass, List<IUser> userList);
         void Browse(List<Hotel> hotels);
         void ViewBookings();
         void ViewDetails();
