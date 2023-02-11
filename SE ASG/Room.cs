@@ -21,6 +21,7 @@ namespace SE_ASG
 
         public Hotel Hotel
         {
+            get { return hotel; }
             set
             {
                 if (hotel != value)
@@ -31,9 +32,10 @@ namespace SE_ASG
             }
         }
 
-        public void ViewDetails()
+        public Room() { }
+
+        public Room(int num, string type, double cost, int max, bool avail)
         {
-            Console.WriteLine("-------- Room Details --------\nRoom number: " + roomNumber + "\nRoom Cost: " + roomCost + "\navailability: " + availability + "");
         }
     }
 }

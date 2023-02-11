@@ -21,9 +21,16 @@ namespace SE_ASG
         public string password { get; set; }
 
         public List<Reservation> reservations;
-
-        public Guest()
+         
+        public Guest() { }
+        public Guest(int id, string e, string num, double bal, string pass)
         {
+            personalID = id;
+            email = e;
+            number = num;
+            balance = bal;
+            password = pass;
+
             reservations = new List<Reservation>();
         }
 
@@ -32,17 +39,15 @@ namespace SE_ASG
         {
             Guest reuturnedGuest = null;
 
-            Console.WriteLine("\nEnter email: ");
             string email = Console.ReadLine();
 
-            Console.WriteLine("\nEnter paswword: ");
             string password = Console.ReadLine();
 
             foreach (Guest g in guestList)
             {
                 if (email == g.email && password == g.password)
                 {
-                    reuturnedGuest = g;
+                    reuturnedGuest = g;              
                 }
             }
 
@@ -117,25 +122,16 @@ namespace SE_ASG
         {
             Console.WriteLine("\nAvailable Hotels:");
             foreach (Hotel h in hotels) { Console.WriteLine(h.hotelID + ") " + h.hotelType); }
-            Console.WriteLine("\nPlease select a hotel: ");
             string answer = Console.ReadLine();
 
             foreach (Hotel h in hotels)
             {
                 if (answer == Convert.ToString(h.hotelID))
                 {
-                    bool roomsAvailable = h.displayDetails();
-
-                    if (roomsAvailable)
                     {
-                        Console.WriteLine("\nDo you want to view rooms? (y/n):");
-                        answer = Console.ReadLine();
 
                         if (answer == "y")
                         {
-                            h.displayRooms();
-
-                            Console.WriteLine("\nPlease select a room to view details (enter any character to go back): ");
                             answer = Console.ReadLine();
                             Room room = h.getRoom(answer);
                             room.ViewDetails();
@@ -145,44 +141,45 @@ namespace SE_ASG
 
                             if (answer == "y")
                             {
-                                if (room != null)
-                                {                                    
-                                    DateTime dateTime;
-                                    DateTime checkIn = DateTime.Now;
-                                    DateTime checkOut = DateTime.Now;
+                            if (room != null)
+                            {
+                                DateTime dateTime;
 
-                                    Console.WriteLine("\nSelect a check in date (dd/mm/yyyy): ");
-                                    answer = Console.ReadLine();
-                                    if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+                                answer = Console.ReadLine();
+                                {
+                                }
+                                else { Console.WriteLine("\nInvalid Input"); break; }
+
+
+                                answer = Console.ReadLine();
+                                {
+                                }
+                                else { Console.WriteLine("\nInvalid Input"); break; }
+
                                     {
-                                        checkIn = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                                    }
-                                    else { Console.WriteLine("\nInvalid Input"); break; }
-
-
-                                    Console.WriteLine("\nSelect a check out date (dd/mm/yyyy): ");
-                                    answer = Console.ReadLine();
-                                    if (DateTime.TryParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
-                                    {
-                                        checkOut = DateTime.ParseExact(answer, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                                    }
-                                    else { Console.WriteLine("\nInvalid Input"); break; }
-
-                                    if (checkIn != DateTime.Now && checkOut != DateTime.Now)
-                                    {
-                                        int id = reservations.Count();
-                                        Reservation newReservation = new Reservation { reservationID = (id += 1), checkInDate = checkIn, checkOutDate = checkOut, reservationCost = room.roomCost, cancelledReservation = false, room = room, paymentMade = false };
                                         ReserveHotel(newReservation);
                                         room.availability = false;
                                         Console.WriteLine("\nReservation made");
+
+                                        Console.Write("Make Payment? (Y/N): ");
+                                        answer = Console.ReadLine().ToLower();
+                                        if (answer == "y") { newReservation.MakePayment(newReservation); }
+                                        else if(answer == "n") { Console.WriteLine("\nPlease pay within 2 days or reservation will be nulled.\n"); break;  }
+                                        else { Console.WriteLine("Invalid Input\n"); break; }
                                     }
-                                    else { Console.WriteLine("\nError: Unable to create"); }
+                                    // No to Make Payment
+                                    else if (answer == "n") { break; }
+                                    //Invalid Inpt
+                                    else { Console.WriteLine("Invalid Input\n"); break; }
                                 }
+                                // check in and check out date doesnt fit criteria
                                 else { Console.WriteLine("\nError: Unable to create"); }
-                            }                                       
+                            }
+                            else { Console.WriteLine("\nError: Unable to create"); }
+                        }
                         }
                         break;
-                    }
+                    }                   
                 }
                 //else { Console.WriteLine("\nInvalid Input"); }
             }
@@ -197,17 +194,16 @@ namespace SE_ASG
             }
         }
 
+        // Need to add this operation in class diagram
         public void ViewBookings()
         {
             if (reservations.Count > 0)
             {
-                Console.WriteLine("\nReservations:\n---------------------");
                 int index = 1;
                 foreach (Reservation r in reservations)
                 {
                     if (r.cancelledReservation)
                     {
-                        Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID + " (cancelled)");
                     }
                     else { Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID); }
                     index++;
@@ -215,6 +211,7 @@ namespace SE_ASG
                 }
                 Console.WriteLine("\nSelect a Reservation ID to display details:\n---------------------");
 
+                Console.Write("-----------------------------------------------------------------\nSelect a Reservation ID to display details: ");
                 string answer = Console.ReadLine();
                 var isNumeric = int.TryParse(answer, out int n);
 
@@ -225,8 +222,7 @@ namespace SE_ASG
                     {
                         if (r.reservationID == n)
                         {
-                            r.displayDetails();
-                        }
+                        }                       
                     }
                 }
 

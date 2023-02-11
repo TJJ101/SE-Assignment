@@ -26,6 +26,15 @@ namespace SE_ASG
             rooms = new List<Room>();
         }
 
+        public Hotel(int id, string type, bool allowV, string addr)
+        {
+            hotelID = id;
+            hotelType = type;
+            allowVoucher = allowV;
+            hotelAddress = addr;
+            rooms = new List<Room>();
+        }
+
         public void AddRoom(Room room)
         {
             if (!rooms.Contains(room))
@@ -33,10 +42,19 @@ namespace SE_ASG
                 rooms.Add(room);
                 room.Hotel = this;
             }
+
+            // calcualte number of available rooms
+            foreach(Room r in rooms)
+            {
+                if(r.availability == true)
+                {
+                    avaliableRooms += 1;
+                }
+            }
         }
 
         // Need to add this operation into the class diagram
-        public bool displayDetails()
+        public bool Details()
         {
             avaliableRooms = 0;
             foreach (Room r in rooms)
@@ -46,7 +64,6 @@ namespace SE_ASG
 
             if (avaliableRooms > 0)
             {
-                Console.WriteLine("-------- Hotel Details --------\nHotel type: " + hotelType + "\nAvailable Rooms: " + avaliableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
                 return true;
             }
             else 
@@ -57,25 +74,30 @@ namespace SE_ASG
         }
 
         // add this into class diagram
-        public void displayRooms()
         {
-            Console.WriteLine("\n-------- Rooms --------");
             foreach (Room r in rooms)
             {
-                Console.WriteLine("1) Room Number: "+ r.roomNumber +" Availability: "+ r.availability +"");
             }
         }
 
         // add this into class diagram
         public Room getRoom(string number)
         {
-            int num = Convert.ToInt32(number);
-            foreach (Room r in rooms)
+            try
             {
-                if (num == r.roomNumber)
+                int num = Convert.ToInt32(number);
+                foreach (Room r in rooms)
                 {
-                    return r;
+                    if (num == r.roomNumber)
+                    {
+                        return r;
+                    }
                 }
+            }
+            catch 
+            {
+                //Console.WriteLine("Invalid Number");
+                //String cant convert to number
             }
             return null;
         }

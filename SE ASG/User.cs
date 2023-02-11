@@ -17,12 +17,7 @@ namespace SE_ASG
 
         // Need to add this to class diagram
         void ViewBookings();
-
-        // Need to add this to class diagram
-        void CancelReservation();
-
-        // add this to class diageam
-        void MakePayment();
+        //void ViewDetails();
 
         void ViewDetails();
     }

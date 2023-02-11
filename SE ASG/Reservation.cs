@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE_Assignment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SE_ASG
 {
-    public class Reservation
+    public class Reservation : IReservationState
     {
         // changed the reservation ID to int (need change in class diagram)
         public int reservationID { get; set; }
@@ -20,13 +21,18 @@ namespace SE_ASG
         //need to add this payment made into class diagram
         public bool paymentMade { get; set; }
 
+        public bool checkedIn { get; set; }
+        public bool checkedOut { get; set; }
         private Guest guest;
+        public Payment pay { get; set; }
 
-        //need add this into the class diagra,
-        public Room room;
+
+        //reservation state
+        public IReservationState reservationState { get; set; }
 
         public Guest Guest
         {
+            get { return guest; }
             set
             {
                 if (guest != value)
@@ -36,31 +42,30 @@ namespace SE_ASG
                 }
             }
         }
-
-        public bool setCancelReservation()
+        public Reservation() { }
+        public Reservation(int id, DateTime cIn, DateTime cOut, Guest g, Room r)
         {
-            Console.WriteLine("Are you sure you want to cancel? (y/n)");
-            string answer = Console.ReadLine();
+            reservationID = id;
+            checkInDate = cIn;
+            checkOutDate = cOut;
+            cancelledReservation = false;
+            paymentMade = false;
+            guest = g;
+            room = r;
 
-            DateTime now = DateTime.Now;
+        {
 
-            if (answer == "y" && (checkInDate - now).TotalDays >= 2 && cancelledReservation == false)
-            {
-                cancelledReservation = true;
-                guest.balance += reservationCost;
-                room.availability = true;
-                return true;
-            }
-            else
-            {
-                return false;
+
+                {
+        }
+                {
             }
         }
-
-        // add this into class diagram
-        public void displayDetails()
+        public void CheckOut(Reservation r)
         {
-            Console.WriteLine("\n-------- Details --------\nRervation ID: "+ reservationID +"\nCheck in date: "+ checkInDate +"\nCheck out date: "+ checkOutDate +"\nIs cancelled: "+ cancelledReservation +"\nPayment made: "+ paymentMade +"");
+            reservationState.CheckOut(r);
+
+            {
         }
     }
 }
