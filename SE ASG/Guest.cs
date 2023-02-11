@@ -58,6 +58,12 @@ namespace SE_ASG
             return reuturnedGuest;
         }
 
+        public void ViewDetails()
+        {
+            Console.WriteLine("\n------------ Details ------------");
+            Console.WriteLine("Personal ID: "+ personalID +"\nEmail: "+ email +"\nBalance: "+ balance +"");
+        }
+
         public void Browse(List<Hotel> hotels)
         {
             Console.WriteLine("\nAvailable Hotels:");

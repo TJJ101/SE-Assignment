@@ -56,18 +56,21 @@ namespace SE_ASG
                         while (true)
                         {
                             // probably need to check for user type as well
-                            Console.WriteLine("\nPlease choose an option (1 - 5): \n1) Browse  \n2) View Reservations\n3) Cancel Reservations\n4) Make Payment\n5) Check In\n6) Check Out\n7) Logout");
+                            Console.WriteLine("\nPlease choose an option (1 - 8): \n1) View Profile\n2) Browse  \n3) View Reservations\n4) Cancel Reservations\n5) Make Payment\n6) Check In\n7) Check Out\n8) Logout");
                             Console.WriteLine("--------------------------");
                             answer = Console.ReadLine();
-                            
+
+                            // View Profile
+                            if (answer == "1") { guest.ViewDetails(); }
+
                             /// Browse Hotel
-                            if (answer == "1") { guest.Browse(hotels); }
+                            if (answer == "2") { guest.Browse(hotels); }
 
                             // View Bookings
-                            else if (answer == "2") { guest.ViewBookings(); }
+                            else if (answer == "3") { guest.ViewBookings(); }
 
                             // Cancel Reservation
-                            else if (answer == "3") 
+                            else if (answer == "4") 
                             {
 
                                 if (guest.reservations.Count == 0) { Console.WriteLine("\nThere are no reservations"); }
@@ -109,7 +112,7 @@ namespace SE_ASG
                             }
 
                             //Make Payment
-                            else if (answer == "4")
+                            else if (answer == "5")
                             {
                                 bool check = false;
                                 foreach (Reservation r in guest.reservations)
@@ -136,7 +139,7 @@ namespace SE_ASG
                                     else { Console.WriteLine("\nInvalid Choice.\n"); }
                                 }
                             }
-                            else if (answer == "5")
+                            else if (answer == "6")
                             {
                                 if(guest.reservations.Count == 0) { Console.WriteLine("\nYou currently have no reservations."); }
                                 else
@@ -168,7 +171,7 @@ namespace SE_ASG
                                     }
                                 }
                             }
-                            else if (answer == "6")
+                            else if (answer == "7")
                             {
                                 if (guest.reservations.Count == 0) { Console.WriteLine("\nYou currently have no reservations."); }
                                 else
@@ -201,7 +204,7 @@ namespace SE_ASG
                                     }
                                 }
                             }
-                            else if (answer == "7") { guest = null; break; }
+                            else if (answer == "8") { guest = null; break; }
                         }
                     }
                     else { Console.WriteLine("Login Error"); }

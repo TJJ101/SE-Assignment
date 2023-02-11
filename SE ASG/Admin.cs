@@ -47,5 +47,10 @@ namespace SE_ASG
 
         // add this to class diageam
         public void MakePayment(Reservation r) { }
+
+        public void ViewDetails()
+        {
+            Console.WriteLine("\nName: " + name +"");
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace SE_ASG
         Guest Login(List<Guest> guestList);
         void Browse(List<Hotel> hotels);
         void ViewBookings();
-        //void ViewDetails();
+        void ViewDetails();
 
     }
 }
