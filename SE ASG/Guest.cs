@@ -85,9 +85,9 @@ namespace SE_ASG
                             if (room != null)
                             {
                                 DateTime dateTime;
-                                DateTime checkIn = DateTime.Now;
-                                DateTime checkOut = DateTime.Now;
                                 DateTime today = DateTime.Now;
+                                DateTime checkIn = today;
+                                DateTime checkOut = today;
 
                                 Console.Write("\nSelect a check in date (dd/mm/yyyy): ");
                                 answer = Console.ReadLine();
@@ -106,12 +106,10 @@ namespace SE_ASG
                                 }
                                 else { Console.WriteLine("\nInvalid Input"); break; }
 
-                                if (checkIn != DateTime.Now && checkOut != DateTime.Now && checkOut.Date > checkIn.Date)
+                                // Check that checkin & checkout date is greater than today and check out date is later than check in
+                                if (checkIn.Date > today.Date && checkOut.Date > today.Date && checkOut.Date > checkIn.Date)
                                 {
-                                    Console.WriteLine("\n" + checkIn.ToString() + " - " + checkOut.ToString() + "\n");
-
-                                    int id = reservations.Count();
-                                    Console.WriteLine("\n\n--------Reservation Details--------------");
+                                    Console.WriteLine("\n--------Reservation Details--------------");
                                     Console.WriteLine("Check-in Date: " + checkIn.ToShortDateString());
                                     Console.WriteLine("Check-out Date: " + checkOut.ToShortDateString());
                                     Console.WriteLine("Days reserved: " + (checkOut - checkIn).TotalDays.ToString());
@@ -122,22 +120,23 @@ namespace SE_ASG
 
                                     if (answer == "y")
                                     {
-                                        Reservation newReservation = new Reservation(id += 1, checkIn, checkOut, this, room);
+                                        Reservation newReservation = new Reservation(reservations.Count() + 1, checkIn, checkOut, this, room);
                                         ReserveHotel(newReservation);
                                         room.availability = false;
+                                        Console.WriteLine("\nReservation made");
 
                                         Console.Write("Make Payment? (Y/N): ");
                                         answer = Console.ReadLine().ToLower();
-                                        if (answer == "y")
-                                        {
-                                            newReservation.MakePayment(newReservation);
-                                        }
-                                        Console.WriteLine("\nReservation made");
+                                        if (answer == "y") { newReservation.MakePayment(newReservation); }
+                                        else if(answer == "n") { Console.WriteLine("\nPlease pay within 2 days or reservation will be nulled.\n"); break;  }
+                                        else { Console.WriteLine("Invalid Input\n"); break; }
                                     }
+                                    // No to Make Payment
                                     else if (answer == "n") { break; }
-                                    else { Console.WriteLine("Invalid Input"); break; }
-                                    
+                                    //Invalid Inpt
+                                    else { Console.WriteLine("Invalid Input\n"); break; }
                                 }
+                                // check in and check out date doesnt fit criteria
                                 else { Console.WriteLine("\nError: Unable to create"); }
                             }
                             else { Console.WriteLine("\nError: Unable to create"); }
@@ -197,93 +196,5 @@ namespace SE_ASG
             }
             else { Console.WriteLine("\nNo reservations found"); }
         }
-
-        public void CancelReservation()
-        {
-            //bool result = false;
-            //bool cancellationAvailable = false;
-
-
-            //if (reservations.Count > 0)
-            //{
-            //    Console.WriteLine("\nReservations:\n---------------------");
-            //    int index = 1;
-
-            //    foreach (Reservation r in reservations)
-            //    {
-            //        if (!r.cancelledReservation)
-            //        {
-            //            Console.WriteLine(index + ") " + "Reservation ID: " + r.reservationID);
-            //            cancellationAvailable = true;
-            //        }
-                    
-            //    }
-
-            //    if (cancellationAvailable)
-            //    {
-            //        Console.WriteLine("\nPlease enter ID of reservation to cancel: ");
-            //        string answer = Console.ReadLine();
-
-            //        foreach (Reservation r in reservations)
-            //        {
-            //            if (r.reservationID == Convert.ToInt32(answer))
-            //            {
-            //                result = r.SetCancelReservation();
-            //            }
-            //        }
-
-            //        if (result) { Console.WriteLine("\nCancellation Successfull"); }
-            //        else { Console.WriteLine("\nCancellation Error"); }
-            //    }
-            //    else { Console.WriteLine("\nThere are no reservations"); }
-
-            //}
-            //else { Console.WriteLine("\nThere are no reservations"); }
-        }
-
-        //public void MakePayment(Reservation r)
-        //{
-        //    Console.WriteLine("\n------------Payment-----------");
-        //    Console.WriteLine("Current Balance: $" + balance);
-        //    Console.WriteLine("Payment Amount: $" + r.reservationCost);
-        //    if (balance - r.reservationCost <= 0)
-        //    {
-        //        Console.WriteLine("Currently you have insufficient balance.\n");
-        //        Console.WriteLine("You have 2 options:");
-        //        Console.WriteLine("1) Do you wish to pay $" + balance + " and pay the rest later");
-        //        Console.WriteLine("2) Pay later");
-        //        Console.WriteLine("-----------------");
-        //        string answer = Console.ReadLine();
-
-        //        if (answer == "1")
-        //        {
-        //            Console.Write("Confirm Payment? (Y/N): ");
-        //            answer = Console.ReadLine().ToLower();
-        //            if (answer == "y")
-        //            {
-        //                r.pay.AmountPaid = balance;
-        //                balance = 0;
-        //                Console.WriteLine("\nRemaining payment cost: $" + (r.reservationCost - r.pay.AmountPaid));
-        //                Console.WriteLine("Please Top up balance and pay the remainder before your check in\n");
-        //            }
-        //            else { Console.WriteLine("Exiting payment\n"); }
-        //        }
-        //        else { Console.WriteLine("Exiting payment\n"); }
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Remainder: $" + (balance - r.reservationCost));
-        //        Console.Write("Confirm payment? (Y/N): ");
-        //        string answer = Console.ReadLine().ToLower();
-        //        if (answer == "y")
-        //        {
-        //            r.pay.AmountPaid = r.reservationCost;
-        //            balance -= r.reservationCost;
-        //            r.paymentMade = true;
-        //            Console.WriteLine("Payment successfully made!");
-        //            r.SetReservationStatus();
-        //        }
-        //    }
-        //}
     }
 }

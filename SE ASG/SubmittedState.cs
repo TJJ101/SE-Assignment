@@ -1,6 +1,7 @@
 ﻿using SE_ASG;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace SE_Assignment
@@ -15,27 +16,8 @@ namespace SE_Assignment
             Console.WriteLine("Payment Amount: $" + r.reservationCost);
             if (r.Guest.balance - r.reservationCost <= 0)
             {
-                Console.WriteLine("Currently you have insufficient balance.\n");
-                Console.WriteLine("You have 2 options:");
-                Console.WriteLine("1) Do you wish to pay $" + r.Guest.balance + " and pay the rest later");
-                Console.WriteLine("2) Pay later");
-                Console.WriteLine("-----------------");
-                string answer = Console.ReadLine();
-
-                if (answer == "1")
-                {
-                    Console.Write("Confirm Payment? (Y/N): ");
-                    answer = Console.ReadLine().ToLower();
-                    if (answer == "y")
-                    {
-                        r.pay.AmountPaid = r.Guest.balance;
-                        r.Guest.balance = 0;
-                        Console.WriteLine("\nRemaining payment cost: $" + (r.reservationCost - r.pay.AmountPaid));
-                        Console.WriteLine("Please Top up balance and pay the remainder before your check in\n");
-                    }
-                    else { Console.WriteLine("Exiting payment\n"); }
-                }
-                else { Console.WriteLine("Exiting payment\n"); }
+                Console.WriteLine("Currently you have insufficient balance.");
+                Console.WriteLine("Please top up and pay within 2 days or your reservation will be nulled.\n");
             }
             else
             {
@@ -49,6 +31,8 @@ namespace SE_Assignment
                     r.paymentMade = true;
                     Console.WriteLine("Payment successfully made!");
                 }
+                else if (answer == "n") { Console.WriteLine("Payment Cancelled"); }
+                else { Console.WriteLine("Invalid Input."); }
             }
         }
         public void CheckIn(Reservation r) { Console.WriteLine("Please make payment before checking in."); }
