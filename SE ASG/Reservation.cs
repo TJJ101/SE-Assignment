@@ -58,26 +58,6 @@ namespace SE_ASG
             pay = new Payment(this);
         }
 
-        //public bool SetCancelReservation()
-        //{
-        //    Console.Write("Are you sure you want to cancel? (Y/N): ");
-        //    string answer = Console.ReadLine().ToLower();
-
-        //    DateTime now = DateTime.Now;
-
-        //    if (answer == "y" && (checkInDate - now).TotalDays >= 2 && cancelledReservation == false)
-        //    {
-        //        cancelledReservation = true;
-        //        guest.balance += reservationCost;
-        //        room.availability = true;
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
         // Display Details of Reservation
         public void DisplayDetails()
         {
