@@ -67,7 +67,7 @@ namespace SE_ASG
 
             if (avaliableRooms > 0)
             {
-                Console.WriteLine("\nHotel type: " + hotelType + "\nAvailable Rooms: " + avaliableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
+                Console.WriteLine("\n-------------- Hotel Details --------------\nHotel type: " + hotelType + "\nAvailable Rooms: " + avaliableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
                 return true;
             }
             else 

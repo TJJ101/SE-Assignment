@@ -132,18 +132,19 @@ namespace SE_ASG
             {
                 if (answer == Convert.ToString(h.hotelID))
                 {
-                    if (h.availableRooms > 0)
+                    h.Details();
+                    if (h.avaliableRooms > 0)
                     {
                         Console.Write("\nDo you want to view rooms? (Y/N): ");
                         answer = Console.ReadLine().ToLower();
 
                         if (answer == "y")
-                        {
+                        {                        
                             Console.WriteLine();
                             h.DisplayRooms();
                             Console.WriteLine("\nPlease select a room: ");
                             answer = Console.ReadLine();
-                            Room room = h.GetRoom(answer);
+                            Room room = h.getRoom(answer);
 
                             if (room != null)
                             {
