@@ -77,6 +77,7 @@ namespace SE_ASG
             Console.WriteLine("Reservation Cost: $" + reservationCost);
             Console.WriteLine("Payment made: "+ paymentMade);
             Console.WriteLine("Status: " + state);
+            Console.WriteLine("--------------------------\n");
         }
 
         public void CancelReservation(Reservation r)

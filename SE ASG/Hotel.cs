@@ -57,7 +57,6 @@ namespace SE_ASG
             }
         }
 
-        // Need to add this operation into the class diagram
         public bool DisplayDetails()
         {
             availableRooms = 0;
@@ -68,7 +67,7 @@ namespace SE_ASG
 
             if (availableRooms > 0)
             {
-                Console.WriteLine("\nHotel type: " + hotelType + "\nAvailable Rooms: " + availableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
+                Console.WriteLine("\n-------------- Hotel Details --------------\nHotel type: " + hotelType + "\nAvailable Rooms: " + availableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
                 return true;
             }
             else 

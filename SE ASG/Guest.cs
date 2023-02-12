@@ -136,13 +136,14 @@ namespace SE_ASG
             {
                 if (answer == Convert.ToString(h.hotelID))
                 {
+                    h.DisplayDetails();
                     if (h.availableRooms > 0)
                     {
                         Console.Write("\nDo you want to view rooms? (Y/N): ");
                         answer = Console.ReadLine().ToLower();
 
                         if (answer == "y")
-                        {
+                        {                        
                             Console.WriteLine();
                             h.DisplayRooms();
                             Console.WriteLine("\nPlease select a room: ");
