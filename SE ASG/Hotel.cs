@@ -8,17 +8,18 @@ namespace SE_ASG
 {
     public class Hotel : ISubject
     {
-        // missing average rating
-
-        // added hotel id from class diagram
         public string hotelID { get; set; }
         public string hotelType { get; set; }
-        private int rating;
-        private string review = "NIL";
-        private List<IObserver> observers = new List<IObserver>(); //Creates a list of observers
 
-        // can remove available room from class diagram
-        public int avaliableRooms { get; set; }
+        // Rating
+        private int rating;
+
+        // Review
+        private string review = "NIL";
+
+        //Creates a list of observers
+        private List<IObserver> observers = new List<IObserver>();
+        public int availableRooms { get; set; }
         public bool allowVoucher { get; set; }
         public string hotelAddress { get; set; }
 
@@ -51,23 +52,23 @@ namespace SE_ASG
             {
                 if(r.availability == true)
                 {
-                    avaliableRooms += 1;
+                    availableRooms += 1;
                 }
             }
         }
 
         // Need to add this operation into the class diagram
-        public bool Details()
+        public bool DisplayDetails()
         {
-            avaliableRooms = 0;
+            availableRooms = 0;
             foreach (Room r in rooms)
             {
-                if (r.availability) { avaliableRooms++; } 
+                if (r.availability) { availableRooms++; } 
             }
 
-            if (avaliableRooms > 0)
+            if (availableRooms > 0)
             {
-                Console.WriteLine("\nHotel type: " + hotelType + "\nAvailable Rooms: " + avaliableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
+                Console.WriteLine("\nHotel type: " + hotelType + "\nAvailable Rooms: " + availableRooms + "\nAllows Vouchers: " + Convert.ToString(allowVoucher) + "\nAddress: " + hotelAddress + "");
                 return true;
             }
             else 
@@ -77,7 +78,6 @@ namespace SE_ASG
             }
         }
 
-        // add this into class diagram
         public void DisplayRooms()
         {
             Console.WriteLine("\n---------------------- Rooms ----------------------");
@@ -89,8 +89,7 @@ namespace SE_ASG
             }
         }
 
-        // add this into class diagram
-        public Room getRoom(string number)
+        public Room GetRoom(string number)
         {
             try
             {

@@ -5,8 +5,10 @@ using System.Text;
 
 namespace SE_Assignment
 {
+    // Start of code done by Tan Jun Jie S10194152D ------------------------------------------------
     public class ConfirmedState : IReservationState
     {
+        // Start of code done by Darius --------------------------------------------------------------
         public void CancelReservation(Reservation r)
         {
             DateTime today = DateTime.Now;
@@ -15,7 +17,7 @@ namespace SE_Assignment
             {
                 // refund the amount that guest paid for reservation
                 r.Guest.balance += r.pay.AmountPaid;
-                r.room.availability = true;
+                r.room.UpdateAvailability(true);
                 Console.WriteLine("\nReservation successfully cancelled\n");
 
                 // Text if refund
@@ -23,6 +25,7 @@ namespace SE_Assignment
             }
             else { Console.WriteLine("\nCancellation error"); }
         }
+        // End of code done by Darius -----------------------------------------------------------------
 
         //Payment already paid for Confirmed Reservations
         public void MakePayment(Reservation r) { Console.WriteLine("Reservation already paid."); }
@@ -63,4 +66,6 @@ namespace SE_Assignment
             else { Console.WriteLine("\nCan't check out.\n"); }
         }
     }
+
+    // End of code done by Tan Jun Jie S10194152D ------------------------------------------------
 }

@@ -8,7 +8,6 @@ namespace SE_ASG
 {
     public class Room
     {
-        // changed room number to string
         public int roomNumber { get; set; }
         public string roomType { get; set; }
         public double roomCost { get; set; }
@@ -44,7 +43,7 @@ namespace SE_ASG
 
         public void UpdateAvailability(bool avail)
         {
-
+            availability = avail;
         }
     }
 }

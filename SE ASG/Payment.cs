@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SE_ASG
 {
+    // Start of code done by Tan Jun Jie S10194152D ------------------------------------------------
     public class Payment
     {
         private double amountPaid;
@@ -34,4 +35,5 @@ namespace SE_ASG
 
         }
     }
+    // End of code done by Tan Jun Jie S10194152D ------------------------------------------------
 }

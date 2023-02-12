@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace SE_ASG
 {
+    // Start of code done by Darius ---------------------------------------------------------------
     public class Guest : IUser
     {
         public int personalID { get; set; }
@@ -58,6 +59,8 @@ namespace SE_ASG
 
             return id;
         }
+
+        // Start of code done by Elgin ---------------------------------------------------
         public List<string> Register(List<IUser> userList)
         {
             bool exist = false;
@@ -114,6 +117,7 @@ namespace SE_ASG
             }
             return null;
         }
+        // End of code done by Elgin ---------------------------------------------------------------
 
         public void ViewDetails()
         {
@@ -145,6 +149,7 @@ namespace SE_ASG
                             answer = Console.ReadLine();
                             Room room = h.GetRoom(answer);
 
+                            // Start of code done by Tan Jun Jie S10194152D ------------------------------------------------
                             if (room != null)
                             {
                                 DateTime dateTime;
@@ -184,7 +189,7 @@ namespace SE_ASG
                                     if (answer == "y")
                                     {
                                         Reservation newReservation = new Reservation(reservations.Count() + 1, checkIn, checkOut, this, room);
-                                        ReserveHotel(newReservation);
+                                        ReserveRoom(newReservation);
                                         room.availability = false;
                                         Console.WriteLine("\nReservation made");
 
@@ -202,6 +207,7 @@ namespace SE_ASG
                                 // check in and check out date doesnt fit criteria
                                 else { Console.WriteLine("\nError: Unable to create"); }
                             }
+                            // End of code done by Tan Jun Jie S10194152D ------------------------------------------------
                             else { Console.WriteLine("\nError: Unable to create"); }
                         }
                         break;
@@ -211,12 +217,13 @@ namespace SE_ASG
             }
         }
 
-        public void ReserveHotel(Reservation r)
+        public void ReserveRoom(Reservation r)
         {
             if (!reservations.Contains(r))
             {
                 reservations.Add(r);
                 r.Guest = this;
+                r.room.UpdateAvailability(false);
             }
         }
 
@@ -260,4 +267,6 @@ namespace SE_ASG
             else { Console.WriteLine("\nNo reservations found"); }
         }
     }
+
+    // End of code done by Darius ------------------------------------
 }

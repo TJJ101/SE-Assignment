@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SE_ASG
 {
+    // Start of code done by Tan Jun Jie S10194152D ------------------------------------------------
     public interface IReservationState
     {
         void CancelReservation(Reservation r);
@@ -13,4 +14,6 @@ namespace SE_ASG
         void CheckIn(Reservation r);
         void CheckOut(Reservation r);
     }
+
+    // End of code done by Tan Jun Jie S10194152D ------------------------------------------------
 }

@@ -34,14 +34,6 @@ namespace SE_ASG
                 new Hotel("5", "themed", true, "T Street")
             };
 
-            //// creating a guest
-            //List<Guest> guests = new List<Guest>
-            //{
-            //    new Guest(1, "user1", "64323224", 10000, "pass1234"),
-            //    new Guest(2, "user2", "98765432", 500, "pass2345"),
-            //    new Guest(3, "user3", "97654321", 100, "pass3456")
-            //};
-
             // Creating rooms for each hotel
             foreach (Hotel h in hotels)
             {
@@ -51,6 +43,7 @@ namespace SE_ASG
             }
 
 
+            // Start of code done by Darius ---------------------------------------------------------------------------
             // Running of the program
             while (true)
             {
@@ -171,6 +164,7 @@ namespace SE_ASG
                                 }
                             }
 
+                            // Start of code done by Tan Jun Jie S10194152D ------------------------------------------------
                             // Check In Reservation
                             else if (answer == "6")
                             {
@@ -316,6 +310,7 @@ namespace SE_ASG
                                     }
                                 }
                             }
+                            // End of code done by Tan Jun Jie S10194152D ------------------------------------------------
 
                             // Log out
                             else if (answer == "8") { guest = null; break; }
@@ -328,7 +323,9 @@ namespace SE_ASG
                         Console.WriteLine("Login Error"); 
                     }
                 }
+                // End of code done by Darius -------------------------------------------------------------------------------
 
+                // Start of code done by Elgin ----------------------------------------------------------------
                 // Register
                 else if (answer == "2")
                 {
@@ -346,6 +343,7 @@ namespace SE_ASG
                         continue;
                     }
                 }
+                // End of code done by Elgin ------------------------------------------------------------------
             }
         }
     }

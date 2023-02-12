@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SE_ASG
 {
+    // Start of code done by Tan Jun Jie S10194152D ------------------------------------------------
     public class Reservation : IReservationState
     {
         public int reservationID { get; set; }
@@ -34,7 +35,7 @@ namespace SE_ASG
                 if (guest != value)
                 {
                     guest = value;
-                    value.ReserveHotel(this);
+                    value.ReserveRoom(this);
                 }
             }
         }
@@ -83,7 +84,13 @@ namespace SE_ASG
             reservationState.CancelReservation(r);
             if(reservationState is ConfirmedState)
             {
-                reservationState = new CancelledState();
+                // Check that cancellation was successful before moving it to cancelled state
+                DateTime today = DateTime.Now;
+                if ((r.checkInDate - today).TotalDays >= 2)
+                {
+                    reservationState = new CancelledState();
+                }
+                    
             }
         }
 
@@ -122,4 +129,6 @@ namespace SE_ASG
             }
         }
     }
+
+    // End of code done by Tan Jun Jie S10194152D ------------------------------------------------
 }

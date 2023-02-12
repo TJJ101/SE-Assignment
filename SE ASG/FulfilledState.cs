@@ -5,6 +5,7 @@ using System.Text;
 
 namespace SE_Assignment
 {
+    // Start of code done by Tan Jun Jie S10194152D ------------------------------------------------
     public class FulfilledState : IReservationState
     {
         // Fulfilled reservations can't perform any of the operations
@@ -13,4 +14,6 @@ namespace SE_Assignment
         public void CheckIn(Reservation r) { Console.WriteLine("\nReservation already fulfilled.\n"); }
         public void CheckOut(Reservation r) { Console.WriteLine("\nReservation already fulfilled.\n"); }
     }
+
+    // End of code done by Tan Jun Jie S10194152D ------------------------------------------------
 }

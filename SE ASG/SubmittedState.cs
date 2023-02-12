@@ -6,6 +6,7 @@ using System.Text;
 
 namespace SE_Assignment
 {
+    // Start of code done by Tan Jun Jie S10194152D ------------------------------------------------
     public class SubmittedState : IReservationState
     {
         public void CancelReservation(Reservation r) { Console.WriteLine("Can't cancel a submitted reservation."); }
@@ -38,4 +39,6 @@ namespace SE_Assignment
         public void CheckIn(Reservation r) { Console.WriteLine("Please make payment before checking in."); }
         public void CheckOut(Reservation r) { Console.WriteLine("Please make payment before checking out"); }
     }
+
+    // End of code done by Tan Jun Jie S10194152D ------------------------------------------------
 }
